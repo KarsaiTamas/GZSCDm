@@ -1,0 +1,24 @@
+actor MastermindRandomSpawner : RandomSpawner Replaces SpiderMastermind 
+{
+
+DropItem "MastermindTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+}
+
+actor MastermindTerranSpawner : RandomSpawner 
+{
+
+DropItem "StarcraftThor", 256, 150
+DropItem "StarcraftBattlecruiser", 256, 150
+}
+actor MastermindProtossSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}
+actor MastermindZergSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}

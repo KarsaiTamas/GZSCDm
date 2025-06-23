@@ -1,0 +1,23 @@
+/*actor ZombiemanRandomSpawner : RandomSpawner Replaces ZombieMan 
+{
+
+DropItem "ZombiemanTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+}
+
+actor ZombiemanTerranSpawner : RandomSpawner 
+{
+
+DropItem "StarcraftMarine", 256, 150
+DropItem "StarcraftMedic", 256, 15
+}
+actor ZombiemanProtossSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}
+actor ZombiemanZergSpawner : RandomSpawner 
+{
+//DropItem "PlasmaGunner", 256, 61
+}*/

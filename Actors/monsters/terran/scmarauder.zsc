@@ -1,0 +1,173 @@
+class StarcraftMarauder:MidTierHumanoid //20001
+{
+	Default
+	{
+	Health 200;
+	Radius 48;
+	Height 64;
+	meleerange 5;
+	DropItem "MarauderRocketL";
+	DropItem "MarauderGreanadeAmmo";
+	DropItem "MediumHealth";
+	DamageFactor "SCRocketMarauder",0;
+	
+	mass 200;
+	MissileHeight 32;
+	Obituary "%o was killed by a marauder";
+	Speed 12;
+	Species "scmarauder";
+	MinMissileChance 5;
+	+BOSSDEATH
+	//+NORADIUSDMG
+	+DONTHARMCLASS
+	+MISSILEMORE
+	+MISSILEEVENMORE
+	SeeSound "SCMad/Allerts";
+	DeathSound "SCMad/Deaths";
+	AttackSound "SCMAD/SHOOT";
+	}
+States
+{
+	Spawn:
+	MADI AB  8 A_Look;
+	Loop; 
+
+	See:
+	MADM ABCD 4 A_Chase("Shoot","Shoot");
+	Loop;
+
+	Pain.PlayerHook:
+	MADI A 64;
+	Goto See;
+	
+	Shoot:
+	SCMA A 0 A_JumpIf(isStimmed,"StimShoot");
+	SCMA A 0 A_Jump(200,2);
+	SCMA A 0 UseStim();
+	MADA A 16 A_FaceTarget;
+	MADA B 2 A_Playsound("SCMAD/SHOOT",5);
+	MADA B 16 Bright A_SpawnProjectile("SCRocketMarauder",50,30,0);
+	MADI A 16;
+	MADA A 0;
+	MADA C 16 A_FaceTarget;
+	MADA D 2 A_Playsound("SCMAD/SHOOT",6);
+	MADA D 16 Bright A_SpawnProjectile("SCRocketMarauder",50,-30,0);
+	MADI A 8 ;
+	Goto See;
+
+	StimShoot:
+	SCMA A 0 A_JumpIf(!isStimmed,"Shoot");
+	MADA A 8 A_FaceTarget;
+	MADA B 2 A_Playsound("SCMAD/SHOOT",5);
+	MADA B 8 Bright A_SpawnProjectile("SCRocketMarauder",50,30,0);
+	MADA A 0;
+	MADI A 8;
+	MADA C 8 A_FaceTarget;
+	MADA D 2 A_Playsound("SCMAD/SHOOT",6);
+	MADA D 8 Bright A_SpawnProjectile("SCRocketMarauder",50,-30,0);
+	MADI A 4;
+	goto See;
+	
+	Death:
+	MADD A 8 A_SCREAM;
+	MADD B 8;
+	MADD C 8;
+	MADD D 8;
+	MADD E 8 A_NoBlocking;
+	MADD F 8;
+	MADD GGHH 4 A_CustomMissile("DeathExplosions",random(30,50),Random(-30,30));
+	MADD H -1 A_BossDeath;
+	stop;
+	   
+	Death.Fire:
+	Death.PlayerFlame:
+	Death.FirebatFlame:
+	Death.PlayerMarauderRocketShot:
+	Death.Extreme:
+	Death.FriendlyMine:
+	Death.MOD_ROCKET:
+	MADE A 0 A_PlaySound("weapons/rocklx",5);
+	MADE A 8 A_SCREAM;
+	MADE B 8 A_NoBlocking;
+	MADE CDE 8;
+	MADE E -1;
+	stop;
+}
+}
+
+
+class SCRocketMarauder : Actor
+{
+	int marauderSlow;
+ 
+	Default
+	{
+
+	Radius 6;
+	Height 8;
+	DamageFunction 20;
+	Projectile;
+	+MTHRUSPECIES
+	+NOGRAVITY
+	-RANDOMIZE
+	Speed 30;
+	FastSpeed 40;
+	+ZDOOMTRANS;
+	+HITTARGET
+	seesound "";
+	deathsound "SCMad/ShootE";
+	scale 0.3;
+	+MISSILE
+	DamageType "SCRocketMarauder";
+	}
+	
+	override void PostBeginPlay()
+	{
+		super.PostBeginPlay();
+		marauderSlow=35*2;
+	}
+	void SlowMonster()
+	{
+
+		Base(target).marauderSlow=marauderSlow;
+		if(!Base(target).isMarauderSlowed)
+		{
+			target.speed/=2;
+			Base(target).isMarauderSlowed=true;
+		}
+		
+	}
+	void SlowPlayer()
+	{
+		StarcraftPlayer(target).marauderSlow=marauderSlow;
+		if(!StarcraftPlayer(target).isMarauderSlowed)
+		{
+			StarcraftPlayer(target).isMarauderSlowed=true;
+			target.speed/=2;
+		}
+	}
+	States
+	{
+	Spawn:
+		MADP A 4 Bright;
+		MISL A 0 Bright A_CustomMissile("RocketTrail",Random(4,6),Random(-2,2));
+		Loop;
+	Death:
+		IAAA A 0 
+		{
+			if(CheckClass("Base",AAPTR_TARGET,true))
+			{
+				SlowMonster();
+			}
+			else
+			{
+				SlowPlayer();
+			}
+		}
+		MISL B 8 Bright;
+		MISL C 6 Bright;
+		MISL D 4 Bright;
+		//A_GiveToTarget("MarauderSlowToken", 1);
+		Stop;
+	}
+}

@@ -1,0 +1,58 @@
+actor ShellSpawner : RandomSpawner Replaces Shell 
+{
+
+DropItem "ShellTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+}
+
+
+actor ShellTerranSpawner : RandomSpawner 
+{
+
+DropItem "ReaperPistolAmmo", 256, 150
+}
+actor ShellProtossSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}
+actor ShellZergSpawner : RandomSpawner 
+{
+//DropItem "PlasmaGunner", 256, 61
+}
+
+actor ShellBoxSpawner : RandomSpawner Replaces ShellBox 
+{
+
+DropItem "ShellBoxTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+}
+
+
+actor ShellBoxTerranSpawner : RandomSpawner 
+{
+
+DropItem "ReaperPistolAmmoBox", 256, 150
+}
+actor ReaperPistolAmmoBox
+{
+states
+{
+Spawn:
+TNT1 A 0
+TNT1 AAAA 0 A_DropItem("ReaperPistolAmmo",10,255)
+stop
+}
+
+}
+actor ShellBoxProtossSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}
+actor ShellBoxZergSpawner : RandomSpawner 
+{
+//DropItem "PlasmaGunner", 256, 61
+}

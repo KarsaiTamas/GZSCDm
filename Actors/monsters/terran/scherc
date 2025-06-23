@@ -1,0 +1,130 @@
+Actor StarcraftHerc:LowTierHumanoid 20041 
+{
+
+	Health 75
+	Radius 20
+	Height 56
+	meleerange 300
+	DropItem "SmallHealth"
+	DropItem "HercFlashWelder"
+	DropItem "ReaperPistolAmmo"
+	mass 50	
+	MissileHeight 32
+	Obituary "%o was killed by a herc"
+	Speed 10
+	Species "scherc"	
+	MinMissileChance 20
+	SeeSound "Herc/AllertS"
+	DeathSound "Herc/DeathS"
+
+States
+{
+	Spawn:
+	HRCI B 0
+	HRCI B 0 A_JumpIfInventory("Spawn2Token",1,"Spawn2")
+	HRCI B 0 A_giveInventory("Spawn2Token",1)
+	HRCI A 0 ACS_NamedExecute("TakeHealTokenOnDamagedHP",0)
+	goto Spawn2
+	
+	Spawn2:
+	HRCI AB  8 A_Look	
+	Loop	
+
+	See:
+	HRCM A 4 
+	HRCM B 4 A_Chase("Shoot","Shoot")
+	HRCM C 4 
+	HRCM D 4 A_Chase("Shoot","Shoot")
+	//HRCI A 0 A_CheckSight("See")
+	HRCI A 0 A_jump(50,"Launch")
+	Loop
+
+	Pain.PlayerHook:
+	HRCI A 0
+	HRCI A 64
+	Goto See
+
+	Shoot:
+	HRCI A 0 
+	HRCS A 4 
+	HRCI A 0 A_PlaySound("Herc/ShootS1")
+	HRCS A 4 A_FaceTarget
+	HRCS B 4 Bright A_CustomMissile("SCHercSlugs",50,-20)
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,15,-90)
+	HRCS CBA 4 
+	Goto See
+
+	Launch:
+	HRCS D 0
+	HRCS D 0 A_JumpIfTargetInsideMeleeRange("Shoot")
+	HRCS D 0 A_PlaySound("Herc/ShootS2")
+	HRCS D 4 A_FaceTarget
+	HRCS D 4 A_CustomMissile("SCHercLunch",18,0,0,CMF_AIMDIRECTION)
+	HRCS D 0 A_ChangeFlag(SLIDESONWALLS,1)
+	HRCS D 8
+	HRCS D 0 
+	HRCM F 4 
+	HRCM E 16 
+	HRCM F 4
+	goto See
+	
+	Death:
+	HRCD A 8 A_SCREAM
+	SCMI B 0 A_giveInventory("NeedHealingToken",1)
+	HRCD B 8 A_NoBlocking
+	HRCD CDE 8 
+	HRCD E -1
+	stop
+
+}
+}
+//SCHercSlugs SCHercLunch
+Actor SCHercSlugs : SCMarineBullet
+{
+   scale 1
++BLOODSPLATTER 
++THRUGHOST
+-DONTSPLASH
+damage (25)
++MISSILE
+speed 30
+	States
+	{
+	Spawn:
+		TUBU A 1 Bright
+	Loop
+	Death:
+		PUFF CD 4
+		Stop
+	}
+
+}
+
+Actor SCHercLunch : grenade
+{
+   scale 0.5
+	+MTHRUSPECIES
+	+MISSILE
+	+DONTFALL
+	+NOTELEPORT
+	-BOUNCEONWALLS
+	+CANBOUNCEWATER
+	Gravity 0.5
+	BounceCount 1
+	damage (10)
+	+MISSILE
+	speed 60
+	deathsound "Herc/ShootE2"
+	DamageType Lunch
+		States{
+	Spawn:
+	HRCP AAAAAAAAAA 2 
+	Stop
+	
+	Death:
+	WEPH A 0 
+	WEPH A 0 ACS_NamedExecuteAlways("Hook_HitWall", 0, 0, 0, 0)
+	HRCP C 16
+	Stop
+}
+}

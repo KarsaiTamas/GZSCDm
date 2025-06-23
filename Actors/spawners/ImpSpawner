@@ -1,0 +1,43 @@
+actor ImpSpawner Replaces DoomImp 
+{
+  states
+  {
+  
+	Spawn:
+	TNT1 A 0
+	TNT1 A 0 A_Jump(100,2)
+	TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("TerranOption") == 1, "SpawnTerran")
+	//TNT1 A 0 A_Jump(100,2)
+	TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("ZergOption") == 1, "SpawnZerg")
+	//TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("ProtossOn") == 1, "SpawnProtoss")
+	SpawnTerran:
+	TNT1 A 0 
+	TNT1 A 0 A_SpawnItemEx("ImpTerranSpawner",1)
+	goto death
+	SpawnZerg:
+	TNT1 A 0 
+	TNT1 A 0 A_SpawnItemEx("ImpZergSpawner",1)
+	goto death
+	SpawnProtoss:
+	
+	goto death
+	death:
+	TNT1 A 0
+	stop
+	}
+}
+
+actor ImpTerranSpawner : RandomSpawner 
+{
+
+DropItem "Starcraftvulture", 256, 150
+}
+actor ImpProtossSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}
+actor ImpZergSpawner : RandomSpawner 
+{
+DropItem "StarcraftHydralisk", 256, 61
+}

@@ -1,0 +1,23 @@
+actor PainElementalRandomSpawner : RandomSpawner Replaces PainElemental 
+{
+
+DropItem "PainElementalTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+}
+
+actor PainElementalTerranSpawner : RandomSpawner 
+{
+DropItem "StarcraftRaven", 256, 150
+DropItem "StarcraftSciencevessel", 256, 150
+}
+actor PainElementalProtossSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}
+actor PainElementalZergSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}

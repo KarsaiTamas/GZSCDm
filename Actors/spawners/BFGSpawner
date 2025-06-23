@@ -1,0 +1,22 @@
+actor BFGSpawner : RandomSpawner Replaces BFG9000 
+{
+
+DropItem "BFGTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+}
+
+actor BFGTerranSpawner : RandomSpawner 
+{
+
+DropItem "YamatoCannon", 256, 150
+}
+actor BFGProtossSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}
+actor BFGZergSpawner : RandomSpawner 
+{
+//DropItem "PlasmaGunner", 256, 61
+}

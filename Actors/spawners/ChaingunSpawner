@@ -1,0 +1,24 @@
+actor ChaingunSpawner : RandomSpawner Replaces Chaingun 
+{
+
+DropItem "ChaingunTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+}
+
+actor ChaingunTerranSpawner : RandomSpawner 
+{
+
+DropItem "MarineWeapon", 256, 150
+DropItem "GhostSniper", 256, 100
+DropItem "SpectreRifle", 256, 50
+}
+actor ChaingunProtossSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}
+actor ChaingunZergSpawner : RandomSpawner 
+{
+//DropItem "PlasmaGunner", 256, 61
+}

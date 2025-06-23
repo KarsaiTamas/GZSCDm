@@ -1,0 +1,87 @@
+Actor StimpackToken:Inventory 
+{
+	Inventory.Amount 0
+	Inventory.MaxAmount 80
+}
+
+Actor StimpackTokenPain:Inventory 
+{
+	Inventory.MaxAmount 1
+}
+
+
+Actor MarauderSlowToken : CustomInventory
+{
+ +INVENTORY.ALWAYSPICKUP
+ States
+  {
+  PickUp:
+	"####" "#" 0 ACS_NAMEDEXECUTEALWAYS("MarauderSlow")
+	
+	Stop
+  PickUp.No:
+	"####" "#" 0
+	Stop
+  }
+}
+
+Actor SlowToken : Inventory { Inventory.MaxAmount 5 }
+Actor IsSlowedDownToken : Inventory { Inventory.MaxAmount 1 }
+
+Actor EnergyTokenGhost:Inventory
+{
+
+Inventory.MaxAmount 200}
+Actor StealthTokenGhost:Inventory
+{
+Inventory.MaxAmount 200}
+Actor InStealthToken:Inventory{Inventory.MaxAmount 1}
+Actor NeedHealingToken:Inventory{Inventory.MaxAmount 1}
+Actor TauntToken:Inventory{Inventory.MaxAmount 1000}
+Actor SiegeToken:Inventory{Inventory.MaxAmount 1}
+Actor PlayerSnipeToken: Inventory{Inventory.MaxAmount 1}
+
+Actor PlayerSnipeTokenSlow: CustomInventory
+{
+ +INVENTORY.ALWAYSPICKUP
+ States
+  {
+  PickUp:
+	"####" "#" 0 ACS_NAMEDEXECUTEALWAYS("SnipeSlow")
+	
+	Stop
+  PickUp.No:
+	"####" "#" 0
+	Stop
+  }
+}
+Actor PlayerSnipeCheckToken: Inventory{Inventory.MaxAmount 1}
+Actor VikingToken: Inventory{Inventory.MaxAmount 1}
+Actor SpiderMineCount: Inventory{Inventory.MaxAmount 3}
+Actor HelionToken: Inventory{Inventory.MaxAmount 1}
+Actor Spawn2Token:Inventory{Inventory.MaxAmount 1}
+Actor IsBurrowed:Inventory{Inventory.MaxAmount 1}
+ACTOR RevolverToken:Inventory{Inventory.MaxAmount 6}
+ACTOR RevolverLimitedToken:Ammo{Inventory.MaxAmount 6 +IGNORESKILL}
+ACTOR RevolverBulletCaseToken:Inventory{Inventory.MaxAmount 6}
+ACTOR YamatoAmmoToken:Ammo{Inventory.MaxAmount 2}
+ACTOR YamatoToken:Ammo{Inventory.MaxAmount 2}
+ACTOR SniperAmmoToken:Ammo{Inventory.MaxAmount 10}
+ACTOR SniperToken:Ammo{Inventory.MaxAmount 10}
+ACTOR HudTerranToken:Inventory{Inventory.MaxAmount 1}
+ACTOR HudZergToken:Inventory{Inventory.MaxAmount 1}
+ACTOR HudProtossToken:Inventory{Inventory.MaxAmount 1}
+Actor HudExecuteToken: CustomInventory
+{
+ +INVENTORY.ALWAYSPICKUP
+ States
+  {
+  PickUp:
+	"####" "#" 0 ACS_NAMEDEXECUTEALWAYS("HudOption")
+	
+	Stop
+  PickUp.No:
+	"####" "#" 0
+	Stop
+  }
+}

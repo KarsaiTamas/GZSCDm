@@ -1,0 +1,70 @@
+ACTOR SpectreRifle : Weapon 20042
+{
+   Weapon.SelectionOrder 700
+   Weapon.AmmoUse 1
+   Weapon.AmmoGive 10
+   Weapon.AmmoType "SniperAmmo"
+   Weapon.slotnumber 4
+   radius 16
+   scale 0.3
+   Inventory.PickupMessage "You got the AGR-14 rifle!" // "You got the chaingun"
+   Obituary "$OB_MPCHAINGUN" // "%o was mowed down by %k's chaingun."
+   Tag "AGR-14 rifle"
+   States
+   {
+	Ready:
+	WESV A 1 A_WeaponReady
+	Loop
+
+	Select:
+	WESV A 1 A_Raise
+	Loop
+	 
+	Deselect:
+	WESV A 1 A_Lower
+	Loop
+	 
+	Fire:
+   	TNT1 A 0 
+	WESV A 0 A_PlaySound("Spectre/ShootS",0)
+	WESV A 0 A_GunFlash
+	WESV A 8 Bright A_FireCustomMissile("PlayerSpectreRifle",0,1,5,5)
+    MAWE E 0 A_FireCustomMissile("SniperBulletShell",-90,0,15,5)
+	WESV FB 2
+	WESV FA 6
+	WESV A 0 A_ReFire
+    Goto Ready
+	
+	Flash:
+	WESV C 2 Bright A_Light2
+	WESV D 4 Bright A_Light1
+	WESV C 2 Bright A_Light0
+	Stop
+	
+	
+	Spawn:
+	WESV E -1
+	Stop
+   }
+}
+Actor PlayerSpectreRifle : Tracer
+{
+   	   scale 1
++BLOODSPLATTER 
++THRUGHOST
+-DONTSPLASH
+damage (50)
++MISSILE
+speed 140
+deathsound "Spectre/ShootE"
+	DamageType PlayerSpectreRifle
+	States
+	{
+	Spawn:
+		TUBU A 1 Bright
+	Loop
+	Death:
+		PUFF CD 4
+		Stop
+	}
+}

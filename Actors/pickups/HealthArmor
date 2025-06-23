@@ -1,0 +1,32 @@
+Actor SmallHealth:Health 20031
+{
+	
+	Inventory.PickupMessage "Picked up a health recharge."
+	Inventory.amount 5
+	Inventory.MaxAmount 300
+	-INVENTORY.ALWAYSPICKUP
+	-COUNTITEM
+	scale 0.1
+	radius 8
+	States
+	{
+	Spawn:
+	HAUS ABCDEFGHIJKLMNOPQRS 1
+	Loop
+	}
+}
+
+Actor MediumHealth:SmallHealth 20032
+{
+	Inventory.amount 10
+	scale 0.15
+	radius 10
+	
+}
+
+Actor BigHealth:SmallHealth 20033
+{
+	scale 0.2
+	Inventory.amount 25
+	radius 12
+}

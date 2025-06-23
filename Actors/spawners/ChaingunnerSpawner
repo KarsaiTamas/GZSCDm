@@ -1,0 +1,24 @@
+actor ChaingunGuyRandomSpawner : RandomSpawner Replaces ChaingunGuy 
+{
+
+DropItem "ChaingunGuyTerranSpawner", 256, 100
+//DropItem "ChaingunGuyTerranSpawner", 256, 100
+//DropItem "ChaingunGuyTerranSpawner", 256, 100
+}
+
+actor ChaingunGuyTerranSpawner : RandomSpawner 
+{
+
+DropItem "StarcraftGhost", 256, 150
+
+}
+actor ChaingunGuyProtossSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}
+actor ChaingunGuyZergSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}

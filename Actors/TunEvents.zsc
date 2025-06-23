@@ -1,0 +1,81 @@
+class LivingActorsHandler:EventHandler
+{
+    HealableActorsThinker actors;
+    override void WorldLoaded(WorldEvent e) 
+    {
+        actors=HealableActorsThinker.GetInstance();
+        actors.healableActors.Clear();
+    }
+    override void WorldThingSpawned(WorldEvent e) 
+    {
+        int i=actors.GetMonsterSpawner(e.thing.GetClassName());
+        //Console.Printf(e.thing.GetClassName());
+
+        if(i!=-1)
+        {
+            actors.monsterReplacers[i].GetSpawnActor();
+            let position= e.thing.pos;
+            let monAngle= e.thing.angle;
+
+            let spawnedActor= Actor.Spawn(actors.monsterReplacers[i].GetSpawnActor(),position);
+            TransferSpecials(e.thing,spawnedActor);
+            level.Total_Monsters--;
+            e.thing.Destroy();
+            spawnedActor.angle=monAngle;
+            return;
+            //Console.Printf(actors.monsterReplacers[i].possibleActorsToSpawn[0].baseMonsterName);
+
+        }
+        if (e.thing.CheckClass("Base",AAPTR_DEFAULT,true)) 
+        {
+            if(Base(e.thing).isMechanical){return;}
+            actors.healableActors.Push(Base(e.thing));
+            if(Base(e.thing).A_CheckFlag("MONSTER",null))
+            {
+                Base(e.thing).team=1;
+            }
+            if(Base(e.thing).A_CheckFlag("FRIENDLY",null))
+            {
+                Base(e.thing).team=2;
+            }
+        }
+    } 
+    //Hdest transfer specials
+    void TransferSpecials(actor source,actor dest,int flags=0){
+		dest.changetid(source.tid);
+		dest.bCountSecret=source.bCountSecret;
+		dest.special=source.special;
+		for(int i=0;i<5;i++){
+			dest.args[i]=source.args[i];
+		}
+		if(flags&TS_ANGLE){
+			dest.angle=source.angle;
+			dest.pitch=source.pitch;
+		}
+		if(flags&TS_VEL)dest.vel=source.vel;
+	}
+    enum TransferSpecialsFlags{
+		TS_ANGLE=1,
+		TS_VEL=2,
+		TS_ALL=TS_ANGLE|TS_VEL,
+	}
+    //////////
+    override void WorldThingDestroyed(WorldEvent e)
+    {
+        if(actors==null)
+        {
+            return;
+        }
+        if (e.thing.CheckClass("Base",AAPTR_DEFAULT,true)) 
+        { 
+            int index = actors.healableActors.Find(Base(e.thing));
+            if (index < actors.healableActors.Size())
+            {
+                actors.healableActors.Delete(index);
+            }
+        }
+
+    }
+    
+    
+}

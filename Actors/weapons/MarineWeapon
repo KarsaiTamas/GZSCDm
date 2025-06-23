@@ -1,0 +1,123 @@
+ACTOR MarineWeapon : Weapon 20010  
+{
+   Weapon.SelectionOrder 700
+   radius 16
+   Weapon.AmmoUse 1
+   Weapon.AmmoUse2 1
+   Weapon.AmmoType2 "Clip"
+   Weapon.AmmoGive 20
+   Weapon.AmmoType "Clip"
+   Weapon.slotnumber 4
+   scale 0.2
+   Inventory.PickupMessage "You got the Impaler gauss rifle!" // "You got the chaingun"
+   Obituary "$OB_MPCHAINGUN" // "%o was mowed down by %k's chaingun."
+   Tag "Gauss Rifle"
+   States
+   {
+   Ready:
+     MAWE D 1 A_WeaponReady
+     Loop
+   Deselect:
+     MAWE D 1 A_Lower
+     Loop
+   Select:
+     MAWE D 1 A_Raise
+     Loop
+   Fire:
+   	MAWE D 2 A_JumpIfInventory("Clip",3,2)
+	MAWE A 0 A_Jump(256,"Ready")
+	MAWE A 0 A_PlaySound("SCMAR/SHOOT1")
+	MAWE A 0 A_GunFlash
+	MAWE E 1 Bright A_FireCustomMissile("PlayerMarineWeapon",0,1,10)
+	MAWE FG 1 Bright
+	MAWE E 0 A_FireCustomMissile("MarineWeaponBulletShell",-90,0,1,1)
+	MAWE HIJ 1 
+	MAWE A 0 A_GunFlash
+	MAWE E 1 Bright A_FireCustomMissile("PlayerMarineWeapon",0,1,10)
+	MAWE FG 1 Bright
+	MAWE E 0 A_FireCustomMissile("MarineWeaponBulletShell",-90,0,1,1)
+	MAWE HIJ 1 
+	MAWE A 0 A_GunFlash
+	MAWE E 1 Bright A_FireCustomMissile("PlayerMarineWeapon",0,1,10)
+    MAWE FG 1 Bright
+	MAWE E 0 A_FireCustomMissile("MarineWeaponBulletShell",-90,0,1,1)
+	MAWE HIJKLMN 2
+	MAWE A 0 A_ReFire
+    Goto Ready
+	
+	altfire:
+	MAWE A 0 A_PlaySound("SCMAR/SHOOT1")
+	MAWE A 0 A_GunFlash
+	MAWE E 1 Bright A_FireCustomMissile("PlayerMarineWeapon",random(-3, 3),1)
+	MAWE FG 1 Bright
+	MAWE E 0 A_FireCustomMissile("MarineWeaponBulletShell",-90,0,1,1)
+	MAWE HIJ 1 
+	MAWE A 0 A_ReFire
+    MAWE HIJKLMN 2
+	
+	goto Ready
+	
+	Flash:
+	MAWE B 1 Bright A_Light2
+	MAWE C 1 Bright A_Light1
+	MAWE B 1 Bright A_Light0
+	Stop
+			
+	Spawn:
+     MAWE A -1
+     Stop
+   }
+}
+Actor PlayerMarineWeapon : Tracer 
+{
+   	   scale 0.1
++BLOODSPLATTER 
++THRUGHOST
+-DONTSPLASH
+damage (15)
++MISSILE
+speed 140
+deathsound ""
+	DamageType PlayerMarineWeapon
+	States
+	{
+	Spawn:
+		BULL A 1 Bright
+	Loop
+	Death:
+		PUFF CD 4
+		Stop
+	}
+}
+
+Actor MarineWeaponBulletShell 
+{
+   	   scale 0.2
+	-BLOODSPLATTER 
+	+THRUGHOST
+	-DONTSPLASH
+	+THRUACTORS
+	+MISSILE
+	speed 2
+	radius 2
+	bouncecount 4
+	WallBounceFactor 0.16
+	BounceFactor 0.36
+	speed 5
+	BounceSound "Bcase/ImpactS"
+	deathsound "Bcase/Impact4"
+	DamageType MarineWeaponBulletShell
+	+BOUNCEONCEILINGS
+	+BOUNCEONFLOORS
+	+BOUNCEONWALLS
+	States
+	{
+	Spawn:
+		BULL BCDEF 2 Bright
+	Loop
+	Death:
+		BULL BBBB 30
+		Stop
+	}
+}
+

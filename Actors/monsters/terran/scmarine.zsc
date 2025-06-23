@@ -1,0 +1,119 @@
+class StarcraftMarine:LowTierHumanoid //20000
+{
+
+	Default
+	{
+	Health 55;
+	Radius 20;
+	Height 56;
+	meleerange 100;
+	scale 0.9;
+	DropItem "MarineWeapon";
+	DropItem "SmallHealth";
+	DropItem "StarcraftStimpack", 1, 20;
+	mass 50	;
+	MissileHeight 32;
+	Obituary "%o was killed by a marine";
+	Speed 12;
+	Species "scmarine";
+	MinMissileChance 20;
+	SeeSound "SCMar/Allert";
+	DeathSound "SCMAR/Deaths";
+	+USEKILLSCRIPTS
+	}
+States
+{
+	Spawn:
+	SCMI AB 8 A_Look;
+	Loop; 
+
+	See:
+	SCMM ABCDE 4 A_Chase("Shoot","Shoot");
+	Loop;
+
+	Pain.PlayerHook:
+	SCMI A 64;
+	Goto See;
+	
+	Shoot:
+	SCMA A 0 A_JumpIf(isStimmed,"StimShoot");
+	SCMA A 0 A_Jump(240,2);
+	SCMA A 0 UseStim();
+	SCMA A 2 ;
+	SCMA A 0 A_PlaySound("SCMAR/SHOOT1");
+	SCMR A 0 A_FaceTarget;
+	SCMA B 2 Bright A_SpawnProjectile("SCMarineBullet",40,10);
+	SCMA B 0 A_SpawnProjectile("MarineWeaponBulletShell",40,15,-90);
+	SCMA C 2 ;
+	SCMR A 0 A_FaceTarget;
+	SCMA D 2 Bright A_SpawnProjectile("SCMarineBullet",40,10);
+	SCMA B 0 A_SpawnProjectile("MarineWeaponBulletShell",40,16,-90);
+	SCMA E 2 ;
+	SCMR A 0 A_FaceTarget;
+	SCMA F 2 Bright A_SpawnProjectile("SCMarineBullet",40,10);
+	SCMA B 0 A_SpawnProjectile("MarineWeaponBulletShell",40,17,-90) ;
+	SCMA A 8 ;
+	Goto See;
+
+	StimShoot:
+	SCMA A 0 A_JumpIf(!isStimmed,"Shoot");
+	SCMA A 0 A_PlaySound("SCMAR/SHOOT1");
+	SCMA A 2 ;
+	SCMR A 0 A_FaceTarget;
+	SCMA B 2 Bright A_SpawnProjectile("SCMarineBullet",40,10);
+	SCMA B 0 A_SpawnProjectile("MarineWeaponBulletShell",40,15,-90);
+	SCMA C 2 ;
+	SCMA A 4 A_Jump(240,"StimShoot");
+	goto See;
+	 
+	Death:
+	SCMD A 3 A_SCREAM;
+	SCMD B 3 A_NoBlocking;
+	SCMD CDEFGHI 3 ;
+	SCMD J -1;
+	stop;
+
+	Death.PlayerFlame:
+	Death.FirebatFlame:
+	SCMD A 0 A_PlaySound("Sound/Burn",5);
+	SCMB A 4 A_SCREAM;
+	SCMB B 4 A_NoBlocking;
+	SCMB CDEFGHIJKL 4;
+	SCMB MNOPQRS 2;
+	SCMB S -1;
+	stop;
+	Death.Extreme:
+	SCMD K 4 A_SCREAM;
+	SCMD L 4 A_NoBlocking;
+	SCMD MNO 4 ;
+	SCMD P -1;
+	stop;
+}
+}
+
+class SCMarineBullet : Actor
+{
+	Default
+	{
+	scale 0.1;
+	+BLOODSPLATTER
+	+THRUGHOST
+	-DONTSPLASH
+	DamageFunction 3;
+	+MISSILE
+	speed 60;
+	deathsound "Bullet/ImpactS";
+	DamageType "Bullet";
+	}
+
+	States
+	{
+	Spawn:
+		BULL A 1 Bright;
+	Loop;
+	Death:
+		PUFF CD 4;
+		Stop;
+	}
+}
+

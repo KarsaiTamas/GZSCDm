@@ -1,0 +1,133 @@
+Actor StarcraftRoach:LowTierHumanoid 20053
+{
+
+	Health 100
+	Radius 30
+	Height 56
+	meleerange 50
+	mass 200
+	MissileHeight 32
+	DropItem "SmallHealth"
+	Obituary "%o was killed by a Roach"
+	PainChance 50
+	Speed 5
+	fastspeed 40
+	Species "Scroach"	
+	MinMissileChance 1
+	+MISSILEMORE
+	+MISSILEEVENMORE
+	SeeSound "Roach/AllertS"
+	DeathSound "Roach/DeathS"
+	ActiveSound "Roach/RoamS"
+	
+	MaxTargetRange 250
+	scale 0.3
+
+States
+{
+	Spawn:
+	ROAI A 0
+	ROAI A 0 A_JumpIfInventory("Spawn2Token",1,"Spawn2")
+	ROAI A 0 A_JumpIfInventory("IsBurrowed",1,"WaitBurrow")
+	ROAI A 0 A_giveInventory("Spawn2Token",1)
+	ROAI A 0 ACS_NamedExecute("TakeHealTokenOnDamagedHP",0)
+	Goto Spawn2
+	
+	Spawn2:
+	ROAI ABCDEFGHIJKLMNOPQRST  1 A_Look	
+	Loop	
+
+	See:
+	ROAM ABCDEFGHIJKLMNOPQRST 1 Fast A_Chase("Melee","Shoot")
+	ZIGM A 0 A_Jump(10,"PrepareBurrow") 
+	Loop
+
+	Melee:
+	ROAE ABCDEFGHIJKL 1 Fast A_FaceTarget
+    ROAE M 1 Fast A_CustomMeleeAttack(45, "ZLing/ShootE","","PredatorHit") 
+    ROAE NOPQRSTUV 1
+	goto See
+	
+	Shoot:
+	ROAS A 1 A_PlaySound("Hidralisk/ShootS",0)
+	ROAS BCDEFGHI 1 A_FaceTarget
+	ROAS JKL 1 A_CustomMissile("SCHydraSpike",10,0)
+	ROAS MNOPQRST 1 
+	goto See
+	
+	Pain:
+	ZIGT C 0 A_JumpIfInventory("IsBurrowed",1,"Unburrow")
+	goto See
+
+	Pain.PlayerHook:
+	ROAI A 0
+	ROAI A 64
+	Goto See
+
+	PrepareBurrow:
+	ROAI AA 0 A_CheckSight("Burrow")
+	Goto See
+
+	Unburrow:
+	ROAU C 0 
+	ROAU C 0 A_ChangeFlag(solid,true)
+	ROAU A 1 A_PlaySound("Zerg/UnBurrow",5)
+	ROAU B 1 A_ChangeFlag(FORCEPAIN,false)
+	ROAU C 0 A_TakeInventory("IsBurrowed",1)
+	ROAU DEFGHIJKLMNOPQRST 1
+	Goto See
+	
+	Burrow:
+	ROAB C 0 
+	ROAB C 0 A_ChangeFlag(solid,false)
+	ROAB A 1 A_ChangeFlag(FORCEPAIN,true)
+	ROAB B 1 A_PlaySound("Zerg/Burrow",5)
+	ROAB C 0 A_GiveInventory("IsBurrowed",1)
+	ROAB CDEFGHIJKLMNOPQRST 1
+	goto WaitBurrow
+
+	WaitBurrow:
+	ROAB ST 4 A_LookEx(LOF_NOSOUNDCHECK|LOF_NOSEESOUND,1,256,0,360,"Unburrow")
+	ZIGM A 0 A_Jump(1,"Unburrow") 
+	loop
+
+	Death:
+	ROAD A 0
+	ROAD B 0 A_giveInventory("NeedHealingToken",1)
+	ROAD A 0 A_SCREAM
+	ROAD ABCDEFGHIJKLMNOPQR 2 
+	ROAD S 2 A_NoBlocking
+	ROAD T -1 
+	stop
+	
+	Death.PlayerFlame:
+	Death.FirebatFlame:
+	ROAF A 0
+	ROAF B 0 A_giveInventory("NeedHealingToken",1)
+	ROAF A 0 A_SCREAM
+	ROAF ABCDEFGHIJKLMNOPQRST 2 
+	ROAF U 2 A_NoBlocking
+	ROAF TSRQPONMLKJKLMNOPQRSTUTSRQPONMLKJKLMNOPQRSTU 1 
+	ROAF V -1 
+	stop
+	
+	Death.PlayerMarauderRocketShot:
+	Death.Extreme:
+	Death.FriendlyMine:
+	Death.MOD_ROCKET:
+	ROAX A 0
+	ROAX B 0 A_giveInventory("NeedHealingToken",1)
+	ROAX A 0 A_SCREAM
+	ROAX A 2 A_CustomMissile("RoachGib1",90,0,5)
+	ROAX B 2 A_CustomMissile("RoachGib1",90,0,-5)
+	ROAX A 0 A_CustomMissile("RoachGib2",90,0,10)
+	ROAX A 0 A_CustomMissile("RoachGib2",90,0,-10)
+	ROAX A 0 A_CustomMissile("RoachGib3",90,0,0)
+	ROAX CDEFGHIJKLMNOPQR 2 
+	ROAX S 2 A_NoBlocking
+	ROAX T -1 
+	stop
+	
+}
+
+}

@@ -1,0 +1,198 @@
+class StarcraftViking:MidTierMech //20035
+{
+	Default
+	{
+	Health 500;
+	Radius 31;
+	Height 56;
+	meleerange 100;
+	scale 1.5;
+	DropItem "MediumHealth";
+	DamageFactor "SCViking",0;
+	mass 400;
+	+FLOAT;
+	+NOGRAVITY;
+	MissileHeight 32;
+	Obituary "%o was killed by a Viking";
+	PainChance 10;
+	Speed 10;
+	Species "Scviking";
+	MinMissileChance 50;
+	SeeSound "Viking/Allerts";
+	DeathSound "Viking/Death";
+	}
+States
+{
+	Spawn:
+	VIKI A 0 A_JumpIf(isFlying,"SpawnFly");
+	VIKI AB 8 A_Look;
+	loop;
+	
+	SpawnFly:
+	VIKI A 0 A_JumpIf(!isFlying,"Spawn");
+	VIKI CC 8 A_Look;	
+	loop;
+	
+	See:
+	VIKI A 0 A_JumpIf(isFlying,"SeeFly");
+	VIKM ABCD 6 A_Chase("BulletShoot","BulletShoot");
+	VIKI A 0 A_Jump(10,"TransformFly");
+	Loop;
+
+	SeeFly:
+	VIKI A 0 A_JumpIf(!isFlying,"See");
+	VIKI CCCC 2 A_Chase("RocketShoot","RocketShoot");
+	VIKM A 0 A_Jump(10,"TransformWalking");
+	Loop;
+
+	Pain:
+	VIKI A 0 A_JumpIf(!isFlying,"PainWalk");
+	VIKI CCCC 2 A_Wander;
+	goto SeeFly;
+	
+	
+	Pain.PlayerHook:
+	VIKI A 0 A_JumpIf(!isFlying,"PainGroundHook");
+	VIKI C 64;
+	Goto SeeFly;
+	
+	PainGroundHook:
+	VIKI A 64;
+	Goto See;
+	
+	PainWalk:
+	VIKM ABCD 6 A_Wander;
+	Goto See;
+	
+	RocketShoot:
+	VIKS A 0;
+	VIKI C 4 A_FaceTarget;
+	VIKI C 4 A_PlaySound("Viking/ShootS2",5);
+	VIKI C 2 Bright A_CustomMissile("SCViking",5,20);
+	VIKI C 2 A_PlaySound("Viking/ShootS2",6);
+	VIKI C 2 Bright A_CustomMissile("SCViking",5,-20);
+	VIKI C 24;
+	Goto SeeFly;
+	
+	TransformWalking:
+	VIKT A 0 A_ChangeFlag("NOPAIN",true);
+	VIKI C 4 A_ChangeVelocity(0,0,2);
+	VIKI C 4 A_ChangeVelocity(0,0,-2);
+	VIKT A 0 A_PlaySound("Viking/Transf1",5);
+	VIKT A 0 SetFly(false);
+	VIKT EDCBA 10;
+	VIKM ABCD 4 A_Wander;
+	VIKT A 0 A_ChangeFlag("NOPAIN",false);
+	goto See;
+	
+	TransformFly:
+	VIKT A 0 A_CheckSight("See");
+	VIKT A 0 A_PlaySound("Viking/Transf2",5);
+	VIKT A 0 A_ChangeFlag("NOPAIN",true);
+	VIKT ABCD 10;
+	VIKT A 0 SetFly(true);
+	VIKT E 10 A_ChangeVelocity(0,0,2);
+	VIKT E 0 A_ChangeVelocity(0,0,-2);
+	VIKI CCCC 4 A_wander;
+	VIKT A 0 A_ChangeFlag("NOPAIN",false);
+	goto SeeFly;
+	
+	BulletShoot:
+	VIKS A 0 A_PlaySound("Viking/ShootS1");
+	VIKS A 8;
+	VIKS A 1 A_FaceTarget;
+	VIKS A 1 Bright A_CustomMissile("SCGoliathBullet",55,-20,0);
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,-20,90);
+	VIKS B 1 Bright A_CustomMissile("SCGoliathBullet",55,20,0);
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,20,-90);
+	VIKS C 1 Bright A_CustomMissile("SCGoliathBullet",55,-20,0);
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,-20,90);
+	VIKS D 1 Bright A_CustomMissile("SCGoliathBullet",55,20,0);
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,20,-90);
+	VIKS A 1 Bright A_CustomMissile("SCGoliathBullet",55,-20,0);
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,-20,90);
+	VIKS B 1 Bright A_CustomMissile("SCGoliathBullet",55,20,0);
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,20,-90);
+	VIKS C 1 Bright A_CustomMissile("SCGoliathBullet",55,-20,0);
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,-20,90);
+	VIKS D 1 Bright A_CustomMissile("SCGoliathBullet",55,20,0);
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,20,-90);
+	VIKI A 16;
+	VIKI B 8;
+	Goto See;
+	
+	
+	Death:
+	VIKD A 0 A_Scream;
+	VIKD A 0 A_NoBlocking;
+	VIKD A 0 A_JumpIf(!isFlying,"GroundDeath");
+	VIKD AABBCC 4 A_CustomMissile("DeathExplosions",random(40,60),Random(-20,20));
+	VIKD DD 4;
+    stop;
+	
+	Death.Extreme:
+	Death.PlayerFlame:
+	Death.PlayerReaperGranade:
+	Death.PlayerMarauderRocketShot:
+	Death.PlayerSpectreRifle:
+	Death.PlayerSlugShot:
+	Death.FriendlyMine:
+	Death.MOD_ROCKET:
+	VIKD A 0 A_Scream;
+	VIKD A 0 A_NoBlocking;
+	VIKD A 0 A_JumpIf(!isFlying,"GroundDeathExtreme");
+	VIKD AABBCC 4 A_CustomMissile("DeathExplosions",random(40,60),Random(-20,20));
+	VIKD DD 4;
+	stop;
+	
+	GroundDeath:
+	VIKD A 0;
+	VIKD IIJJKK 4 A_CustomMissile("DeathExplosions",random(40,60),Random(-20,20));
+	VIKD LM 8 ;
+	VIKD M -1;
+	stop;
+	
+	GroundDeathExtreme:
+	VIKD A 0;
+	VIKD EEFFGG 4 A_CustomMissile("DeathExplosions",random(40,60),Random(-20,20));
+	VIKD HH 4;
+	VIKD H -1;
+	stop;
+}
+}
+
+
+class SCViking : SCRocketMarauder
+{
+	Default
+	{
+	DamageFunction 30;
+	ExplosionDamage 20;
+	ExplosionRadius 64;
+	Speed 15;
+	FastSpeed 25;
+	DamageType "SCViking";
+	deathsound "SCMad/ShootE";
+	scale 0.3;
+	}
+	States
+	{
+	Spawn:
+	BSEP A 1 Bright;
+	MISL A 0 Bright A_CustomMissile("RocketTrail",Random(4,6),Random(-2,2));
+	Loop;
+	Death:
+	MISL B 8 Bright A_Explode;
+	MISL C 6 Bright;
+	MISL D 4 Bright;
+	Stop;
+	}
+}
+
+class SCVikingBullet : SCMarineBullet
+{
+	Default
+	{
+		DamageFunction 6;
+	}
+}

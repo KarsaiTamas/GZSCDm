@@ -1,0 +1,23 @@
+actor CyberRandomSpawner : RandomSpawner Replaces Cyberdemon 
+{
+
+DropItem "CyberTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+}
+
+actor CyberTerranSpawner : RandomSpawner 
+{
+
+DropItem "StarcraftWarhound", 256, 150
+}
+actor CyberProtossSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}
+actor CyberZergSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}

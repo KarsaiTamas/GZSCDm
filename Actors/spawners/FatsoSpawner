@@ -1,0 +1,22 @@
+actor FatsoRandomSpawner : RandomSpawner Replaces Fatso 
+{
+
+DropItem "FatsoTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+}
+
+actor FatsoTerranSpawner : RandomSpawner 
+{
+DropItem "StarcraftMarauder", 256, 150
+}
+actor FatsoProtossSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}
+actor FatsoZergSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}

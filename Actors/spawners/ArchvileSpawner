@@ -1,0 +1,22 @@
+actor ArchvileRandomSpawner : RandomSpawner Replaces Archvile 
+{
+
+DropItem "ArchvileTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+}
+
+actor ArchvileTerranSpawner : RandomSpawner 
+{
+DropItem "StarcraftSpectre", 256, 150
+}
+actor ArchvileProtossSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}
+actor ArchvileZergSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}

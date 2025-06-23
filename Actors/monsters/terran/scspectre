@@ -1,0 +1,150 @@
+Actor StarcraftSpectre:HighTierHumanoid 20022
+{
+
+	Health 600
+	Radius 20
+	Height 56
+	meleerange 200
+	scale 0.8
+	DropItem "BigHealth"
+	DropItem "SpectreRifle"
+	DropItem "SniperAmmo"
+	mass 100
+	MissileHeight 32
+	Obituary "%o was killed by a Spectre"
+	PainChance 4
+	Speed 10
+	Species "Scspectre"	
+	MinMissileChance 50
+	SeeSound "Spectre/Allerts"
+	DeathSound "Spectre/Deaths"
+	
+States
+{
+	Spawn:
+	SPRI A 0
+	SPRI A 0 A_JumpIfInventory("Spawn2Token",1,"Spawn2")
+	SPRI A 0 A_giveInventory("Spawn2Token",1)
+	SPRI A 0 A_giveInventory("EnergyTokenGhost",30)
+	SPRI A 0 ACS_NamedExecute("TakeHealTokenOnDamagedHP",0)
+	SPRI A 0 ACS_NamedExecute("EnergyGain",0)
+	goto Spawn2	
+	
+	Spawn2:
+	SPRI AB  8 A_Look	
+	loop
+	
+	See:
+	SPRM ABCD 4 A_Chase("KineticAttack","Shoot")
+	Loop
+
+
+	Pain:
+	goto See
+	
+	Pain.PlayerHook:
+	SPRI A 0
+	SPRI A 64
+	Goto See
+	
+	
+	KineticAttack:
+	SPRQ A 0
+	SPRQ A 0 A_Jump(200,"Stun")
+	SPRQ A 0 A_PlaySound("Spectre/PsyAS")
+	SPRQ A 32 Bright A_VileTarget//("SCSpectreKineticAttack")
+	SPRQ BC 32 Bright A_VileTarget
+	SPRQ BA 8 
+	SPRQ A 0 A_giveInventory("EnergyTokenGhost",1)
+	SPRQ A 4 A_VileAttack("Spectre/PsyAE",100,10,64,0,"KineticAttack")
+	goto see
+	
+	Stun:
+	SPRS A 0
+	SPRS A 0 A_JumpIfInventory("EnergyTokenGhost",75,"StunStart")
+	goto KineticAttack
+	
+	StunStart:
+	SPRS A 0 A_PlaySound("Spectre/GranSS")
+	SPRS A 8 A_TakeInventory("EnergyTokenGhost",75)
+	SPRS B 8 Bright A_CustomMissile("StunGrenade",50,-20)
+	goto KineticAttack
+	
+	Shoot:
+	SPRS A 4 A_FaceTarget
+	SPRS A 0 A_playsound("Spectre/ShootS")
+	SPRS A 8 
+	SPRS B 8 Bright A_CustomMissile("SCSpectreShoot",50,15)
+	SCMA B 0 A_CustomMissile("SniperBulletShell",40,15,-90)
+	SPRS AAA 8 
+	Goto see
+	
+	Death:
+    SPRD A 8 A_SCREAM
+	SCMI B 0 A_giveInventory("NeedHealingToken",1)
+	SPRD B 8 A_SetTranslucent(1,0)
+	SPRD CDEF 8  
+	SPRD F 0 A_NoBlocking
+    SPRD F -1 
+	stop
+}
+}
+
+
+Actor SCSpectreShoot : SCMarineBullet
+{
+   	
+	damage(35)
+	speed 60
+	deathsound "Spectre/ShootE"
+	scale 1
+	States
+	{
+	Spawn:
+		TUBU A 1 Bright
+	Loop
+	Death:
+		PUFF CD 4
+		Stop
+	}
+}
+
+Actor StunGrenade:grenade
+{
+
+	damage (0)
+	ExplosionDamage 10
+	ExplosionRadius 128
+	Radius 2
+	Height 2
+    Speed 13
+	Speed 20
+	Scale 0.4
+	BounceCount 2
+	SeeSound ""
+	deathsound "Spectre/GranSE"
+	+MTHRUSPECIES
+	+MISSILE
+	+DONTFALL
+	+NOTELEPORT
+	Gravity 0.6
+	Mass 400
+	DamageType StunGrenade
+	States
+	{
+	Spawn:
+		MISL A 1 Bright 
+		Loop
+	Death:
+		MISL B 8 Bright A_Explode
+		MISL C 6 Bright 
+		MISL D 4 Bright 
+		Stop
+	}
+
+
+
+
+
+}
+//make sniper rifle

@@ -1,0 +1,141 @@
+Actor StarcraftReaper:LowTierHumanoid 20006
+{
+
+	Health 60
+	Radius 20
+	Height 56
+	scale 0.6
+	meleerange 250
+	DropItem "ReaperPistols"
+	DropItem "SmallHealth"
+	DropItem "ReaperPistolAmmo"
+	DropItem "ReaperGranadeAmmo"
+	
+	DamageFactor "SCGrenadeReaper",0
+	mass 50	
+	MissileHeight 32
+	Obituary "%o was killed by a reaper"
+	PainChance 50
+	Speed 15
+	Species "screaper"	
+	MinMissileChance 20	
+	SeeSound "Reaper/Allerts"
+	DeathSound "Reaper/Deaths"
+	+JUMPDOWN
+	+DROPOFF
+	+DONTHARMCLASS
+	
+States
+{
+	Spawn:
+	REPI A 0
+	REPI A 0 A_JumpIfInventory("Spawn2Token",1,"Spawn2")
+	REPI A 0 A_giveInventory("Spawn2Token",1)
+	REPI A 0 ACS_NamedExecute("TakeHealTokenOnDamagedHP",0)
+	Goto Spawn2
+	
+	Spawn2:
+	REPI ABC 8 A_Look	
+	Loop	
+
+	See:
+	REPI ABC 4 A_Chase("ThrowGrenade","Shoot")
+	Loop
+	
+	Pain:
+	goto See
+	
+	Pain.PlayerHook:
+	REPI A 0
+	REPI A 64
+	Goto See
+	
+	ThrowGrenade:
+	REPT A 16
+	SCMR A 0 A_FaceTarget
+	REPT B 8 Bright A_CustomMissile("SCGrenadeReaper",50,15,0)
+	REPT A 0 A_jump(1,"See")
+	REPT B 8 A_MonsterRefire (100, "See")
+	REPT B 0 A_CheckRange(260,"See")
+	Goto ThrowGrenade
+	
+	Shoot:
+	SCMR A 0 A_FaceTarget
+	REPS A 4 
+	REPS A 0 A_PlaySound("Reaper/SHOOT")
+	SCMR A 0 A_FaceTarget
+	REPS B 4 Bright A_CustomMissile("SCNormalReaper",60,-13)
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,15,-90)
+	REPS B 4 
+	SCMR A 0 A_FaceTarget
+	REPS C 4 Bright A_CustomMissile("SCNormalReaper",60,13)
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,15,90)
+	REPS A 0 A_jump(1,"See")
+	REPS A 16 A_MonsterRefire (100, "See")
+	Goto Shoot
+	
+	Death:
+	REPD A 8 A_SCREAM
+	SCMI B 0 A_giveInventory("NeedHealingToken",1)
+	REPD B 8 A_NoBlocking
+	REPD CDEFGH 8 
+	REPD IJ 4 A_CustomMissile("DeathExplosions",random(30,50),Random(-15,15)) 
+	REPD J -1
+	stop
+	
+	Death.Fire:
+	Death.PlayerFlame:
+	Death.FirebatFlame:
+	Death.Explosion:
+	Death.PlayerMarauderRocketShot:
+	Death.Extreme:
+	REPE A 6 A_SCREAM
+	SCMI B 0 A_giveInventory("NeedHealingToken",1)
+	REPE B 6 A_NoBlocking
+	REPE CD 6 A_CustomMissile("DeathExplosions",random(30,50),Random(-15,15)) 
+	stop
+}
+}
+
+
+Actor SCNormalReaper : SCMarineBullet
+{
+	damage (6)
+}
+
+
+Actor SCGrenadeReaper :grenade
+{
+	damage (20)
+	ExplosionDamage 10
+	ExplosionRadius 32
+   	Radius 2
+	Height 2
+    Speed 13
+	fastSpeed 20
+	Scale 0.4
+	SeeSound ""
+	deathsound ""
+	+MTHRUSPECIES
+	+MISSILE
+	+DONTFALL
+	+NOTELEPORT
+	-BOUNCEONWALLS
+	+CANBOUNCEWATER
+	Gravity 0.3
+	Mass 400
+	DamageType SCGrenadeReaper
+	States
+	{
+	Spawn:
+	GRAD ABCDEFGH 2 Bright 
+	Goto death
+	Death:
+	MISL BB 0 A_PlaySound("Reaper/GrenadeE")
+	MISL B 8 Bright A_Explode
+	MISL C 6 Bright
+	MISL D 4 Bright 
+	Stop
+	}
+}
+

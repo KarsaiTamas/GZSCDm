@@ -1,0 +1,22 @@
+actor BaronSpawner : RandomSpawner Replaces BaronOfHell 
+{
+DropItem "BaronTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+}
+
+actor BaronTerranSpawner : RandomSpawner 
+{
+
+DropItem "StarcraftWarbot", 256, 125
+DropItem "StarcraftDiamondback", 256, 125
+}
+actor BaronProtossSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}
+actor BaronZergSpawner : RandomSpawner 
+{
+//DropItem "PlasmaGunner", 256, 61
+}

@@ -1,0 +1,72 @@
+ACTOR FangGun : Weapon 20045
+{
+   Weapon.SelectionOrder 700
+   radius 16
+   Weapon.AmmoUse 1
+   Weapon.AmmoGive 20
+   Weapon.AmmoType "Clip"
+   Weapon.slotnumber 4
+   scale 0.2
+   Inventory.PickupMessage "You got the Fang gun!" // "You got the chaingun"
+   Obituary "$OB_MPCHAINGUN" // "%o was mowed down by %k's chaingun."
+   Tag "Fang Gun"
+   States
+   {
+   Ready:
+     WEFG A 1 A_WeaponReady
+     Loop
+   Deselect:
+     WEFG A 1 A_Lower
+     Loop
+   Select:
+     WEFG A 1 A_Raise
+     Loop
+   Fire:
+   	MAWE A 2 A_JumpIfInventory("Clip",3,2)
+	MAWE A 0 A_SelectWeapon("Shotgun")
+	MAWE A 0 A_PlaySound("SCMAR/SHOOT1")
+	MAWE A 0 A_GunFlash
+	MAWE A 2 Bright A_FireCustomMissile("Fangs",0,1,10)
+	MAWE A 2 
+	MAWE A 0 A_GunFlash
+	MAWE A 2 Bright A_FireCustomMissile("Fangs",0,1,10)
+	MAWE A 2 
+	MAWE A 0 A_GunFlash
+	MAWE A 2 Bright A_FireCustomMissile("Fangs",0,1,10)
+    MAWE A 16
+	MAWE A 0 A_ReFire
+    Goto Ready
+	
+	Flash:
+	MAWE C 1 Bright A_Light2
+	MAWE D 1 Bright A_Light1
+	MAWE C 1 Bright A_Light0
+	Stop
+			
+	Spawn:
+     WEFG A -1
+     Stop
+   }
+}
+Actor Fangs : Tracer 
+{
+   	   scale 0.3
++BLOODSPLATTER 
++THRUGHOST
+-DONTSPLASH
+damage (15)
++MISSILE
+speed 140
+deathsound "Bullet/ImpactS"
+	DamageType PlayerMarineWeapon
+	States
+	{
+	Spawn:
+		BULL A 1 Bright
+	Loop
+	Death:
+		PUFF CD 4
+		Stop
+	}
+}
+

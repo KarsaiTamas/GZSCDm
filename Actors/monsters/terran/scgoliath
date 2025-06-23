@@ -1,0 +1,157 @@
+Actor StarcraftGoliath:MidTierMech 20008
+{
+
+	Health 500
+	Radius 24
+	Height 64
+	scale 0.6
+	meleerange 200
+	DamageFactor "SCGoliathRocket",0
+
+	DropItem "MediumHealth"
+	mass 500
+	MissileHeight 32
+	Obituary "%o was killed by a goliath"
+	PainChance 5
+	Speed 10
+	Species "ScGoliath"	
+	MinMissileChance 20
+	+DONTHARMCLASS
+	SeeSound "Goliath/Allert"
+	DeathSound "Goliath/Death"
+
+	States
+	{
+	Spawn:
+	GOLI A 0 
+	GOLI B 0 A_JumpIfInventory("Spawn2Token",1,"Spawn2")
+	GOLI B 0 A_giveInventory("Spawn2Token",1)
+	GOLI A 0 ACS_NamedExecute("TakeHealTokenOnDamagedHP",0)
+	Goto Spawn2
+	
+	Spawn2:
+	GOLI AB  8 A_Look		
+	Loop	
+	
+	pain:
+	GOLM ABCD 4 A_Wander
+	goto see
+
+	Pain.PlayerHook:
+	GOLI A 0
+	GOLI A 64
+	Goto See
+
+
+	See:
+	GOLM ABCD 4 A_Chase("Shoot","Shoot")
+	Loop
+	
+	Shoot:
+	GOLS A 0 A_Jump(100,"RocketShoot")
+	Goto BulletShoot
+	
+	BulletShoot:
+	GOLS A 0 A_PlaySound("Goliath/Shoot") 
+	GOLS A 8 
+	GOLS B 1 A_FaceTarget
+	GOLS B 1 Bright A_CustomMissile("SCGoliathBullet",55,20,0)
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",55,20,-90)
+	GOLS B 1 Bright A_CustomMissile("SCGoliathBullet",55,-20,0)
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",55,-20,90)
+	GOLS B 1 Bright A_CustomMissile("SCGoliathBullet",35,0,0)
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",35,0)
+	GOLS A 1 A_FaceTarget
+	GOLS B 1 Bright A_CustomMissile("SCGoliathBullet",55,20,0)
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",55,20,-90)
+	GOLS B 1 Bright A_CustomMissile("SCGoliathBullet",55,-20,0)
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",55,-20,90)
+	GOLS B 1 Bright A_CustomMissile("SCGoliathBullet",35,0,0)
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",35,0)
+	GOLS A 1 A_FaceTarget
+	GOLS B 1 Bright A_CustomMissile("SCGoliathBullet",55,20,0)
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",55,20,-90)
+	GOLS B 1 Bright A_CustomMissile("SCGoliathBullet",55,-20,0)
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",55,-20,90)
+	GOLS B 1 Bright A_CustomMissile("SCGoliathBullet",35,0,0)
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",35,0)
+	GOLS A 2 
+	GOLS B 2 A_FaceTarget
+	GOLS B 1 Bright A_CustomMissile("SCGoliathBullet",55,20,0)
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",55,20,-90)
+	GOLS B 1 Bright A_CustomMissile("SCGoliathBullet",55,-20,0)
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",55,-20,90)
+	GOLS B 1 Bright A_CustomMissile("SCGoliathBullet",35,0,0)
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",35,0)
+	GOLS A 1 A_FaceTarget
+	GOLS B 1 Bright A_CustomMissile("SCGoliathBullet",55,20,0)
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,20,-90)
+	GOLS B 1 Bright A_CustomMissile("SCGoliathBullet",55,-20,0)
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,20,90)
+	GOLS B 1 Bright A_CustomMissile("SCGoliathBullet",35,0,0)
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",35,0)
+	GOLS A 1 A_FaceTarget
+	GOLS B 1 Bright A_CustomMissile("SCGoliathBullet",55,20,0)
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",55,20,-90)
+	GOLS B 1 Bright A_CustomMissile("SCGoliathBullet",55,-20,0)
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",55,-20,90)
+	GOLS B 1 Bright A_CustomMissile("SCGoliathBullet",35,0,0)
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",35,0)
+	GOLS A 8 
+	Goto See
+	
+	RocketShoot:
+	GOLS A 0 A_PlaySound("Goliath/ROcketS") 
+	GOLI A 4 A_FaceTarget
+	GOLS C 4 Bright A_CustomMissile("SCGoliathRocket",50,15,0)
+	GOLS D 4 A_FaceTarget
+	GOLS D 4 Bright A_CustomMissile("SCGoliathRocket",50,-15,0)
+	GOLS C 8
+	Goto See
+	
+   Death:
+   GOLD A 8 A_SCREAM
+   SCMI B 0 A_giveInventory("NeedHealingToken",1)
+   GOLD B 8 
+   GOLD C 8 
+   GOLD D 8 
+   GOLD E 8 A_NoBlocking
+   GOLD FFGGHH 4 A_CustomMissile("DeathExplosions",Random(40,70),Random(-30,30)) 
+   GOLD H -1    
+   stop
+	}
+}
+
+
+Actor SCGoliathRocket : SCRocketMarauder
+{
+	damage (20)
+	Speed 20
+	ExplosionDamage 20
+	ExplosionRadius 64
+	FastSpeed 30
+	DamageType SCGoliathRocket
+	deathsound "Goliath/RocketE"
+	Species "ScGoliath"	
+	scale 0.5
+	
+	States
+	{
+	Spawn:
+	GOLP A 1 Bright 
+	GOLP A 0 Bright A_CustomMissile("RocketTrail",Random(4,6),Random(-2,2))
+	Loop
+	
+	Death:
+	MISL B 8 Bright A_Explode
+	MISL C 6 Bright
+	MISL D 4 Bright 
+	Stop
+	}
+}
+Actor SCGoliathBullet : SCMarineBullet
+{
+
+	damage (3)
+
+}

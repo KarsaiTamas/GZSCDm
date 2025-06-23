@@ -1,0 +1,23 @@
+actor ShotgunSpawner : RandomSpawner Replaces Shotgun 
+{
+
+DropItem "ShotgunTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+}
+
+actor ShotgunTerranSpawner : RandomSpawner 
+{
+
+DropItem "ReaperPistols", 256, 150
+DropItem "HercFlashWelder", 256, 100
+}
+actor ShotgunProtossSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}
+actor ShotgunZergSpawner : RandomSpawner 
+{
+//DropItem "PlasmaGunner", 256, 61
+}

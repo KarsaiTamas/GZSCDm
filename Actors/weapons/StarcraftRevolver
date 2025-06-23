@@ -1,0 +1,152 @@
+ACTOR StarcraftRevolver : Weapon 20049
+{
+   Weapon.SelectionOrder 700
+   radius 16
+   Weapon.AmmoUse 1
+   Weapon.AmmoUse2 0
+   Weapon.AmmoType2 "Clip"
+   Weapon.slotnumber 2
+   scale 0.2
+   Weapon.AmmoType "RevolverLimitedToken"
+   Inventory.PickupMessage "You got the Revolver!" // "You got the chaingun"
+   Obituary "$OB_MPCHAINGUN" // "%o was mowed down by %k's chaingun."
+   Tag "Revolver"
+   +WEAPON.NOALERT
+   +WEAPON.NOAUTOFIRE
+   States
+   { 
+	Ready: 
+	WEAA B 0
+	WEAA B 1 A_WeaponReady(WRF_ALLOWRELOAD)
+	WEAA B 0 A_JumpIfInventory("RevolverToken",6,"Reload")	
+	WEAA B 0
+	Loop
+	Deselect:
+	WEAA B 1 A_Lower
+	Loop
+	Select:
+	WEAA B 1 A_Raise
+	Loop
+	Fire:
+	WEAA BB 0 A_JumpIfInventory("RevolverToken",6,"Reload")	
+	 WEAA B 0 A_PlaySound("Revolver/Shoot",0)
+	TNT1 A 0 A_AlertMonsters
+	TNT1 A 0 A_GunFlash
+	WEAA B 2 Bright A_FireBullets(1,1,1,45,"BulletPuff",FBF_NORANDOM)
+	WESR E 0 A_SetPitch(pitch-4)
+	WEAA B 0 A_GiveInventory("RevolverToken",1)
+	WEAA A 0 A_TakeInventory("RevolverLimitedToken",1)
+	WEAA A 0 A_TakeInventory("RevolverBulletCaseToken",1)
+	WEAA B 0 A_JumpIfInventory("RevolverToken",6,"Reload")	
+	WEAA CDE 1 
+	WEAA A 0 
+	WESR E 0 A_SetPitch(pitch+2)
+	WEAA E 1 A_WeaponReady(WRF_NOSWITCH)
+	WESR E 0 A_SetPitch(pitch+2)
+	WEAA FFGGHH 1 A_WeaponReady(WRF_NOSWITCH)
+	WEAA CCBB 1 A_WeaponReady(WRF_NOSWITCH)
+	WEAA B 0 A_JumpIfInventory("RevolverToken",6,"Reload")	
+	Goto Ready
+	 
+		
+	Flash:
+	WEAA L 1 Bright A_Light2
+	WEAA M 1 Bright A_Light1
+	Stop	
+		
+	Reload:
+	WEAA B 0 
+	WEAA B 0 A_JumpIfInventory("Clip",1,2)	
+	WEAA B 0 A_Jump(256,"Ready")	
+	WEAA BB 0 A_JumpIfInventory("RevolverLimitedToken",6,"Ready")	
+	WEAA B 0 A_PlaySound("Revolver/Reload2",1)
+	WEAB ABCDEF 3
+	WEAA B 0 A_JumpIfInventory("RevolverBulletCaseToken",5,10)	
+	WEAB A 0 A_FireCustomMissile("MarineWeaponBulletShell",random(-90,-60),0,10,5)
+	WEAA B 0 A_JumpIfInventory("RevolverBulletCaseToken",4,8)	
+	WEAB A 0 A_FireCustomMissile("MarineWeaponBulletShell",random(-90,-60),0,12,7)
+	WEAA B 0 A_JumpIfInventory("RevolverBulletCaseToken",3,6)	
+	WEAB A 0 A_FireCustomMissile("MarineWeaponBulletShell",random(-90,-60),0,14,9)
+	WEAA B 0 A_JumpIfInventory("RevolverBulletCaseToken",2,4)	
+	WEAB A 0 A_FireCustomMissile("MarineWeaponBulletShell",random(-90,-60),0,16,11)
+	WEAA B 0 A_JumpIfInventory("RevolverBulletCaseToken",1,2)	
+	WEAB A 0 A_FireCustomMissile("MarineWeaponBulletShell",random(-90,-60),0,18,13)
+	WEAB A 0 A_FireCustomMissile("MarineWeaponBulletShell",random(-90,-60),0,20,15)
+	WEAA A 0 A_GiveInventory("RevolverBulletCaseToken",6)
+	WEAB GHI 2  
+	WEAA B 0 A_PlaySound("Revolver/Reload1",0) 
+	WEAA A 0 A_TakeInventory("RevolverToken",1)
+	WEAA B 0 A_GiveInventory("RevolverLimitedToken",1)
+	WEAA A 0 A_TakeInventory("Clip",1)
+	WEAA B 0 A_JumpIfInventory("RevolverLimitedToken",6,"EndReload")	
+	WEAA A 0 A_Refire("EndReload")
+	WEAA A 0 A_WeaponReady(WRF_NOFIRE)
+	WEAA B 0 A_JumpIfInventory("Clip",1,2)	
+	WEAA B 0 A_Jump(256,"EndReload")	
+	WEAB JK 2 A_Refire("EndReload")
+	WEAA B 0 A_PlaySound("Revolver/Reload1",0)
+	WEAB LM 2 A_Refire("EndReload")
+	WEAA A 0 A_TakeInventory("RevolverToken",1)
+	WEAA B 0 A_GiveInventory("RevolverLimitedToken",1)
+	WEAA A 0 A_TakeInventory("Clip",1)
+	WEAA B 0 A_JumpIfInventory("RevolverLimitedToken",6,"EndReload")	
+	WEAA A 0 A_Refire("EndReload")
+	WEAA A 0 A_WeaponReady(WRF_NOFIRE)
+	WEAA B 0 A_JumpIfInventory("Clip",1,2)	
+	WEAA B 0 A_Jump(256,"EndReload")
+	WEAB NO 2 A_Refire("EndReload")
+	WEAA B 0 A_PlaySound("Revolver/Reload1",0)
+	WEAB PQ 2 A_Refire("EndReload")
+	WEAB A 0 A_WeaponReady(WRF_NOFIRE)
+	WEAA A 0 A_TakeInventory("RevolverToken",1)
+	WEAA B 0 A_GiveInventory("RevolverLimitedToken",1)
+	WEAA A 0 A_TakeInventory("Clip",1)
+	WEAA B 0 A_JumpIfInventory("RevolverLimitedToken",6,"EndReload")	
+	WEAA A 0 A_Refire("EndReload")
+	WEAA A 0 A_WeaponReady(WRF_NOFIRE)
+	WEAA B 0 A_JumpIfInventory("Clip",1,2)	
+	WEAA B 0 A_Jump(256,"EndReload")
+	WEAB RS 2 A_Refire("EndReload")
+	WEAA B 0 A_PlaySound("Revolver/Reload1",0)
+	WEAB TU 2 A_Refire("EndReload")
+	WEAA A 0 A_TakeInventory("RevolverToken",1)
+	WEAA B 0 A_GiveInventory("RevolverLimitedToken",1)
+	WEAA A 0 A_TakeInventory("Clip",1)
+	WEAA B 0 A_JumpIfInventory("RevolverLimitedToken",6,"EndReload")	
+	WEAA A 0 A_Refire("EndReload")
+	WEAA A 0 A_WeaponReady(WRF_NOFIRE)
+	WEAA B 0 A_JumpIfInventory("Clip",1,2)	
+	WEAA B 0 A_Jump(256,"EndReload")
+	WEAB VW 2 A_Refire("EndReload")
+	WEAA B 0 A_PlaySound("Revolver/Reload1",0)
+	WEAB XY 2 A_Refire("EndReload")
+	WEAA A 0 A_TakeInventory("RevolverToken",1)
+	WEAA B 0 A_GiveInventory("RevolverLimitedToken",1)
+	WEAA A 0 A_TakeInventory("Clip",1)
+	WEAA B 0 A_JumpIfInventory("RevolverLimitedToken",6,"EndReload")	
+	WEAA A 0 A_Refire("EndReload")
+	WEAA A 0 A_WeaponReady(WRF_NOFIRE)
+	WEAA B 0 A_JumpIfInventory("Clip",1,2)	
+	WEAA B 0 A_Jump(256,"EndReload")
+	WEAB Z 2 A_Refire("EndReload")
+	WEAC I 2 A_Refire("EndReload")
+	WEAA B 0 A_PlaySound("Revolver/Reload1",0)
+	WEAC AB 2 A_Refire("EndReload")
+	WEAA A 0 A_TakeInventory("RevolverToken",1)
+	WEAA B 0 A_GiveInventory("RevolverLimitedToken",1)
+	WEAA A 0 A_TakeInventory("Clip",1)
+	WEAA B 0 A_JumpIfInventory("RevolverLimitedToken",6,"EndReload")	
+	WEAA A 0 A_Refire("EndReload")
+	WEAA A 0 A_WeaponReady(WRF_NOFIRE)
+	EndReload:
+	WEAC CDE 2
+	WEAA B 0 A_PlaySound("Revolver/Reload2",1)
+	WEAC FGH 2
+	Goto Ready
+	
+	Spawn:
+	WEAA A -1
+	Stop
+   }
+}
+

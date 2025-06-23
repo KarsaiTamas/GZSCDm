@@ -1,0 +1,22 @@
+actor RocketLauncherSpawner : RandomSpawner Replaces RocketLauncher 
+{
+
+DropItem "RocketLauncherTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+}
+
+actor RocketLauncherTerranSpawner : RandomSpawner 
+{
+
+DropItem "MarauderRocketL", 256, 150
+}
+actor RocketLauncherProtossSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}
+actor RocketLauncherZergSpawner : RandomSpawner 
+{
+//DropItem "PlasmaGunner", 256, 61
+}

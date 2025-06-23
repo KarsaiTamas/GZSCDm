@@ -1,0 +1,22 @@
+actor RevRandomSpawner : RandomSpawner Replaces Revenant 
+{
+
+DropItem "RevTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+}
+
+actor RevTerranSpawner : RandomSpawner 
+{
+DropItem "StarcraftCyclone", 256, 150
+}
+actor RevProtossSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}
+actor RevZergSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}//21048 21049 21050 21051

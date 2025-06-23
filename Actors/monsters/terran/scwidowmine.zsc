@@ -1,0 +1,114 @@
+class StarcraftWidowMine:LowTierMech //20037
+{
+	Default
+	{
+	Health 100;
+	Radius 30;
+	Height 56;
+	meleerange 200;
+	scale 1;
+	mass 400;
+	DropItem "SmallHealth";
+	MissileHeight 32;
+	Obituary "%o was killed by a Widowmine";
+	PainChance 10;
+	Speed 10;
+	Species "Scwidowmine";
+	MinMissileChance 50;
+	SeeSound "Widowmine/AllertS";
+	DeathSound "Banshee/Death";
+	-COUNTKILL;
+	}
+
+States
+{
+	Spawn:
+	WIDI A 0 ;
+	WIDT C 0 A_ChangeFlag("solid",true);
+	WIDI AB 4 A_look;
+	loop;
+	
+	Unburrow:
+	WIDI A 0 ;
+	WIDT C 0 A_ChangeFlag("solid",true);
+	WIDT E 4 A_PlaySound("Widowmine/Transform2",5);
+	WIDT EDCBA 4;
+	Goto Run;
+	
+	Burrow:
+	WIDI A 0 ;
+	WIDT C 0 A_ChangeFlag("FRIGHTENED",false);
+	WIDT C 0 A_ChangeFlag("solid",false);
+	WIDT A 4 A_PlaySound("Widowmine/Transform1",5);
+	WIDT ABCDE 8;
+	Goto WaitBurrow;
+	
+	WaitBurrow:
+	WIDT E 8 A_LookEx(LOF_NOSOUNDCHECK|LOF_NOSEESOUND,1,256,0,360,"Melee");
+	loop;
+	
+	See:
+	WIDM ABABAB 2 A_wander;
+	goto Burrow;
+	
+	Run:
+	WIDI A 0;
+	WIDI C 0 A_ChangeFlag("FRIGHTENED",true);
+	WIDM ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB 2 A_chase("Noattack");
+	WIDM ABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB 2 A_chase("Noattack");
+	Goto Burrow;
+	
+	Pain.PlayerHook:
+	WIDI A 0;
+	WIDT C 0 A_ChangeFlag("solid",true);
+	WIDI C 0 A_ChangeFlag("FRIGHTENED",true);
+	WIDI A 64;
+	Goto See;
+	
+	Noattack:
+	Goto Run;
+	
+	Melee:
+	WIDI A 0 A_PlaySound("Widowmine/ShootS",5) ;
+	WIDT E 8 A_FaceTarget;
+	WIDT E 8 Bright A_CustomMissile("SCWidowRocket",50,20);
+	WIDT E 8;
+	Goto Unburrow;
+	
+	Death:
+	WIDI A 4 A_CustomMissile("DeathExplosions",random(40,60),Random(-20,20));
+    WIDD A 4 A_SCREAM;
+    WIDD B 4;
+    WIDD A 0 A_NoBlocking ;
+    stop;
+}
+}
+
+class SCWidowRocket : SCRocketMarauder
+{
+	Default
+	{
+	DamageFunction (20);
+	ExplosionDamage 40;
+	ExplosionRadius 96;
+	Speed 20;
+	FastSpeed 30;
+	RenderStyle "Translucent";
+	+HITTARGET	;
+	DamageType "SCWidowRocket";
+	deathsound "Warbot/ShootE";
+	scale 0.7;
+	}
+	States
+	{
+	Spawn:
+		CYCP A 1 Bright;
+		MISL A 0 Bright A_CustomMissile("RocketTrail",Random(4,6),Random(-2,2));
+		Loop;
+	Death:
+		MISL B 8 Bright A_Explode;
+		MISL C 6 Bright;
+		MISL D 4 Bright ;
+		Stop;
+	}
+}

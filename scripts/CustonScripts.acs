@@ -1,0 +1,346 @@
+#library "CustonScripts.acs"
+#include "zcommon.acs"
+
+Function Int Angle (Int tid1, Int tid2)
+{
+    int x, y;
+    x = GetActorX(tid1) - GetActorX(tid2);
+    y = GetActorY(tid1) - GetActorY(tid2);
+    return VectorAngle(x, y);
+}
+
+Function Int RoundInt (Int f)
+{
+	Return f >> 16;
+}
+
+Function Bool IsTIDUnique (Int TID)
+{
+	If (ThingCount(T_NONE, TID) > 1)
+	{
+		// It isn't unique, so return false
+		Return False;
+	}
+	
+	If (!(IsTIDUsed(TID)))
+	{
+		// There are no actors with this TID
+		Return False;
+	}
+	Return True;
+}
+
+Function Int GetActivatorTID (void)
+{
+	If (!(IsTIDUnique(ActivatorTID())))
+		Thing_ChangeTID (0, UniqueTID());
+	Return ActivatorTID();
+}
+
+
+Function Int ZDistance (Int tid1, Int tid2)
+{
+	Return (GetActorZ(tid1) - GetActorZ(tid2));
+}
+
+
+
+Function Int FixedDistance (Int tid1, Int tid2)
+{	
+	Int x = GetActorX(tid1) - GetActorX(tid2);
+	Int y = GetActorY(tid1) - GetActorY(tid2);
+	
+	Int len = VectorLength(x, y);
+	Return len;
+}
+
+Function Int ByteAngle (Int tid1, Int tid2)
+{
+    return Angle(tid1, tid2) >> 8;
+}
+
+Function Int Distance (Int tid1, Int tid2)
+{
+	Return RoundInt (FixedDistance(tid1, tid2));
+}
+
+Script "StimpackEffects" (int speed) 
+{
+    SetActorProperty(0, APROP_SPEED, (GetActorProperty(0, APROP_SPEED) * speed));
+   
+}
+Script "StimpackEffectsSlow" (int speed) 
+{
+    SetActorProperty(0, APROP_SPEED, (GetActorProperty(0, APROP_SPEED) / speed));
+   
+}
+script "SettingSpeed"(int speed)
+{
+    SetActorProperty(0, APROP_SPEED, speed);
+
+}
+script "DamageActorSelf"(int amount,int health) 
+{
+	
+	if(CheckSight(0,0,CSF_NOFAKEFLOORS)){
+		if(GetActorProperty(0,APROP_Health)>health)
+		{
+		
+		SetActorProperty(0,APROP_Health,GetActorProperty(0,APROP_Health)-amount);
+		
+		
+		}
+	}
+}
+script "GiveToken"(int token, int amount)
+{
+GiveInventory(token,1);
+
+}
+
+script "MarauderSlow"(void) NET
+{
+if(CheckInventory("IsSlowedDownToken")==0)
+{
+SetActorProperty(0, APROP_SPEED, (65536 /2));
+GiveInventory("SlowToken",5);
+GiveInventory("IsSlowedDownToken",1);
+while(CheckInventory("IsSlowedDownToken")==1)
+{
+for(int i=0;i<34;i++)
+{
+	delay(1);
+	if(CheckInventory("SlowToken")==0 && CheckInventory("IsSlowedDownToken")==1)
+	{
+	SetActorProperty(0, APROP_SPEED, 65536);
+	
+	TakeInventory("MarauderSlowToken",1);
+	TakeInventory("IsSlowedDownToken",1);
+	Terminate;
+	}
+if(CheckInventory("IsSlowedDownToken")==0)
+{
+SetActorProperty(0, APROP_SPEED, 65536);
+	
+TakeInventory("MarauderSlowToken",1);
+Terminate;
+}
+}
+
+	delay(1);
+	TakeInventory("SlowToken",1);
+	if(CheckInventory("SlowToken")==0)
+	{
+	TakeInventory("IsSlowedDownToken",1);
+	}
+	
+
+}
+
+	SetActorProperty(0, APROP_SPEED, 65536);
+	TakeInventory("MarauderSlowToken",1);
+	TakeInventory("IsSlowedDownToken",1);
+	}
+	
+	
+}
+script "SnipeSlow"(void)
+{
+	
+	if(CheckInventory("PlayerSnipeCheckToken")==0)
+	{
+
+	SetActorProperty(0, APROP_SPEED, (65536/2));
+	
+GiveInventory("PlayerSnipeCheckToken",1);
+while(CheckInventory("PlayerSnipeToken")==1)
+{
+	Delay(1);
+
+}
+
+	SetActorProperty(0, APROP_SPEED, 65536);
+	TakeInventory("PlayerSnipeToken",1);
+	TakeInventory("PlayerSnipeCheckToken",1);
+	}
+	
+}
+script "test"(void){log(s:"works");}
+
+
+script "GiveHealthTokenOnMaxHP"(void)
+{
+	SetActivatorToTarget(0);
+	if(GetActorProperty(0,APROP_Health)==GetActorProperty(0,APROP_SpawnHealth))
+	{
+		GiveInventory("NeedHealingToken",1);
+	}
+}
+
+script "TakeHealTokenOnDamagedHP"(void)
+{
+	
+while(GetActorProperty(0,APROP_Health)>0)
+{
+	if(GetActorProperty(0,APROP_Health)<GetActorProperty(0,APROP_SpawnHealth))
+	{
+		TakeInventory("NeedHealingToken",1);
+	}
+	delay(35);
+}
+
+}
+script "ChoseMissleHorizontal"(int smaller, int bigger,int side)
+{
+if(side==1)
+{
+SetResultValue(smaller);
+    terminate;
+}
+else
+{
+SetResultValue(bigger);
+    terminate;
+}
+
+}
+script "StunHit"(void)
+{
+
+fadeto(255, 255, 255, 1.0, 0.0);
+Delay(48);
+fadeto(255, 255, 255, 0.0, 3.0);
+
+}
+
+script "InventoryAmountReaperGr"(void)
+{
+int ret=CheckInventory("ReaperGranadeAmmo");
+SetResultValue(ret);
+}
+
+script "EnergyGainCloack"(void)
+{
+if(GetActorProperty(0,APROP_Health)<1){terminate;}
+if(CheckInventory("InStealthToken")==0)
+{
+GiveInventory("EnergyTokenGhost",1);
+TakeInventory("StealthTokenGhost",1);
+}
+else
+{
+GiveInventory("StealthTokenGhost",1);
+TakeInventory("EnergyTokenGhost",1);
+}
+/*
+Log(s:"Energy token");
+Log(d:CheckInventory("EnergyTokenGhost"));
+Log(s:"Stealth token");
+Log(d:CheckInventory("StealthTokenGhost"));
+*/
+delay(20);
+restart;
+}
+
+script "EnergyGain"(void)
+{
+GiveInventory("EnergyTokenGhost",1);
+delay(20);
+restart;
+}
+
+//From doom exp
+Script "Hook_HitWall" (void)
+{
+	Int HTID = GetActivatorTID ();
+	Int StoredPlayer_TID;
+	SetActivatorToTarget(HTID); // Should be the player, unless something went horribly wrong
+	
+	If (ActivatorTID() != 0)
+	{
+		StoredPlayer_TID = ActivatorTID();
+		Thing_ChangeTID (ActivatorTID(), UniqueTID());
+	}
+	Int PTID = GetActivatorTID ();
+	
+	Int f_Distance = Distance (HTID, PTID);
+	Int b_Angle = ByteAngle (HTID, PTID);
+	Int ZHeight = (ZDistance(PTID, HTID) + 0.5) >> 16;
+	ThrustThing (b_Angle, f_Distance/11, True, PTID);
+	ThrustThingZ (0, (ZHeight/3), 1, PTID);
+	If (StoredPlayer_TID != 0)
+	{
+		SetActivator(PTID);
+		Thing_ChangeTID(PTID, StoredPlayer_TID);
+	}
+}
+
+script "SelectGrenade"(void) NET
+{
+	if(CheckInventory("ReaperGranadeAmmo")>0)
+	{
+		SetWeapon("ReaperGranade");
+	}
+}
+
+script "SelectMine"(void) NET
+{
+if(CheckInventory("SpiderMineAmmo")>0)
+	{
+		SetWeapon("SpiderMineWeapon");
+	}
+}
+
+Script "TerranOption" (void)
+{
+if(GetCVar("Terran")==0 && GetCVar("Zerg")==0)
+{
+SetResultValue(1);
+}
+    SetResultValue(GetCVar("Terran"));
+}
+
+Script "ZergOption" (void)
+{
+    SetResultValue(GetCVar("Zerg"));
+}
+
+script "HudOption"(void)
+{
+switch (GetCVar("HudStyle"))
+{
+case 1:
+default:
+	GiveInventory("HudTerranToken",1);
+	TakeInventory("HudZergToken",1);
+	TakeInventory("HudProtossToken",1);
+
+    SetResultValue(2);
+break;
+case 2:
+	GiveInventory("HudZergToken",1);
+	TakeInventory("HudTerranToken",1);
+	TakeInventory("HudProtossToken",1);
+    SetResultValue(3);
+break;
+case 3:
+	GiveInventory("HudProtossToken",1);
+	TakeInventory("HudTerranToken",1);
+	TakeInventory("HudZergToken",1);
+    SetResultValue(1);
+break;
+
+}
+Delay(1);
+restart;
+}
+
+script "ResetAmmo"(int token,int ammo,int maxAmmo)
+{
+if(CheckInventory(token)!=maxAmmo-CheckInventory(ammo))
+{
+int amount=maxAmmo-CheckInventory(ammo);
+TakeInventory(token,maxAmmo);
+GiveInventory(token,amount);
+}
+}

@@ -1,0 +1,23 @@
+actor SRocketSpawner : RandomSpawner Replaces RocketAmmo
+{
+
+DropItem "SRocketTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+}
+
+actor SRocketTerranSpawner : RandomSpawner 
+{
+
+DropItem "ReaperGranadeAmmo", 256, 150
+DropItem "SpiderMineAmmo", 256, 100
+}
+actor SRocketProtossSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}
+actor SRocketZergSpawner : RandomSpawner 
+{
+//DropItem "PlasmaGunner", 256, 61
+}

@@ -1,0 +1,117 @@
+class StarcraftMedic:HighTierHumanoid //20003
+{
+	Base actorToHeal;
+	HealableActorsThinker healerThinker;
+	Default
+	{
+	Health 60;
+	Radius 20;
+	Height 56;
+	Reactiontime 1;
+	meleerange 200;
+	DropItem "BigHealth";
+	mass 50	;
+	MissileHeight 32;
+	GibHealth 10;
+	Obituary "%o was killed by a medic... WTF??? HOW???";
+	PainChance 50;
+	Speed 10;
+	Species "scmedic";
+	DeathSound "SCMED/Death";
+	}
+	override void PostBeginPlay()
+	{
+		super.PostBeginPlay();
+		healerThinker=HealableActorsThinker.GetInstance();
+	}
+	bool GetTarget() 
+	{
+		actorToHeal=healerThinker.GetHealTarget(self);
+		if(actorToHeal==null)
+		{
+
+			return false;
+		}
+		target=actorToHeal;
+		
+		return true;
+	}
+	void HealTarget(int amount)
+	{
+		if(actorToHeal==null || actorToHeal.SpawnHealth()<=actorToHeal.health)
+		{
+			return;
+		}
+		actorToHeal.health+=amount;
+		A_PlaySound("SCMed/Heal",0);
+	}
+	bool KeepHealing()
+	{
+		if(actorToHeal==null ||actorToHeal.SpawnHealth()<=actorToHeal.health || !actorToHeal.canBeHealed)
+		{
+			A_ClearTarget();
+			return false;
+		}
+		return true;
+	}
+	bool TargetInRange()
+	{
+		if(actorToHeal==null) return false;
+		return self.Distance3D(actorToHeal)<meleerange*2;
+		 
+	}
+
+States
+{
+	Spawn:
+	MEDS AB 8 A_LookEx(label:"Wander");
+	Loop;
+
+	See:
+	MEDM A 0 A_JumpIf(TargetInRange(),"MedicBeam");
+	goto Wander;
+
+	Wander:
+	MEDM A 0 A_JumpIf(GetTarget(),"See");
+	MEDM ABCDABCD 4 A_wander;
+	MEDM ABCDABCD 4 A_wander;
+	MEDM ABCDABCD 4 A_wander;
+	goto See;  
+	
+	Pain:
+	goto Wander;
+	
+	Pain.PlayerHook:
+	MEDS A 0;
+	MEDS A 64;
+	Goto Wander;
+	
+	MedicBeam:
+	MEDH A 0 A_JumpIf(!KeepHealing(),"Wander");
+	MEDH A 3 A_FaceTarget;
+	MEDH B 3 HealTarget(3);
+	Goto MedicBeam;
+		
+	Death:
+	MEDD A 4 ;//A_changeflag("FRIENDLY",false);
+	MEDD A 4 A_SCREAM;
+	MEDD B 4 A_NoBlocking;
+	MEDD CDEFGH 4 ;
+	MEDD H -1;
+	stop;
+	   
+	Death.PlayerFlame:
+	Death.FirebatFlame:
+	SCMD A 0 A_PlaySound("Sound/Burn",5);
+	MEDF A 6 A_SCREAM;
+	MEDF B 6 A_NoBlocking;
+	MEDF CDEFG 6 ;
+	SCMF JK 6;
+	MEDF G -1;
+	stop;
+}
+}
+
+
+
+

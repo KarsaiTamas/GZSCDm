@@ -1,0 +1,73 @@
+ACTOR ReaperPistols : Weapon 20013
+{
+   Weapon.SelectionOrder 700
+   Weapon.AmmoUse 1
+   Weapon.AmmoGive 6
+   Weapon.slotnumber 3
+   Weapon.AmmoType "ReaperPistolAmmo"
+   radius 16
+   scale 0.4
+   Inventory.PickupMessage "You got the P-38 pistols!" // "You got the chaingun"
+   Obituary "$OB_MPCHAINGUN" // "%o was mowed down by %k's chaingun."
+   Tag "P-38 pistols"
+   States
+   {
+	Ready:
+	WERR A 1 A_WeaponReady
+	Loop
+	
+	Deselect:
+	WERR A 1 A_Lower
+	Loop
+	
+	Select:
+	WERR A 1 A_Raise
+	Loop
+	
+	Fire: 
+	WERR A 0 A_PlaySound("Reaper/SHOOT",0)
+	WERR A 0 A_GunFlash
+	WERR B 4 Bright A_FireCustomMissile("PlayerPistolShot",0,1,10) 
+	MAWE E 0 A_FireCustomMissile("MarineWeaponBulletShell",-90,0,15,5)
+	WERR A 0 
+	WERR A 0 A_PlaySound("Reaper/SHOOT",0)
+	WERR C 4 Bright A_FireCustomMissile("PlayerPistolShot",0,1,-10)
+	MAWE E 0 A_FireCustomMissile("MarineWeaponBulletShell",90,0,-15,5)
+	WERR H 12 
+	WERR A 0 A_ReFire
+	Goto Ready
+
+	Flash:
+	WERR D 2 Bright A_Light2
+	WERR E 2 Bright A_Light1
+	WERR F 2 Bright A_Light1
+	WERR G 2 Bright A_Light0
+	Stop
+
+	Spawn:
+	WERS A -1
+	Stop
+   }
+}
+Actor PlayerPistolShot : Tracer
+{
+    scale 0.3
+	+BLOODSPLATTER 
+	+THRUGHOST
+	-DONTSPLASH
+	damage (30)
+	+MISSILE
+	speed 140
+	DamageType PlayerPistolShot
+	deathsound "Reaper/ShootE"
+	States
+	{
+	Spawn:
+		BULL A 1 Bright
+	Loop
+	Death:
+		PUFF CD 4
+		Stop
+	}
+}
+

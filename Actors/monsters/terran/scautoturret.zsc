@@ -1,0 +1,77 @@
+class StarcraftAutoturret:TerranMech //20025
+{
+	Default
+	{
+		Health 150;
+		Radius 20;
+		Height 56;
+		Reactiontime 100;
+		meleerange 100;
+		DropItem "Clip";
+		mass 1000	;
+		MissileHeight 32;
+		Obituary "%o was killed by an auto turret";
+		Speed 0;
+		Species "scturret"	;
+		MinMissileChance 20;
+		DeathSound "AutoTurret/Death";
+		+MISSILEMORE;
+		+MISSILEEVENMORE;
+	}
+
+States
+{
+	Spawn:
+	TURB A 0 A_PlaySound("AutoTurret/Birth",5);
+	TURB ABCDE 32;
+	TURI A 8;
+	TURI A 0 A_PlaySound("AutoTurret/Allert",6);
+	goto Spawn2;
+	
+	Spawn2:
+	TURI A 8 A_Look;
+	Loop;
+
+	See:
+	TURI A 1 A_Chase("Shoot","Shoot");
+	Loop;
+
+	Pain.PlayerHook:
+	TURI A 0;
+	TURI A 64;
+	Goto See;
+
+	Shoot:
+	TURS A 2 ;
+	TURS A 0 A_PlaySound("AutoTurret/Shoot");
+	TURS A 0 A_FaceTarget;
+	TURS B 2 Bright A_CustomMissile("SCMarineBullet",40,10);
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,10,20);
+	TURS A 2 ;
+	TURS A 0 A_FaceTarget;
+	TURS B 2 Bright A_CustomMissile("SCMarineBullet",40,10);
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,10,20);
+	TURS A 2 ;
+	TURS A 0 A_FaceTarget;
+	TURS B 2 Bright A_CustomMissile("SCMarineBullet",40,10);
+	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,10,20);
+	TURS B 34 A_MonsterRefire (100, "See");
+	Goto Shoot;
+
+	Death:
+	TURD A 8 A_SCREAM; 
+	TURD B 8 A_NoBlocking;
+	TURD CDEFG 8 ;
+	stop;
+
+}
+}
+/*
+Actor SCTurretBullet : SCMarineBullet
+{
+	Default
+	{
+		DamageFunction 3;
+	}
+}*/
+

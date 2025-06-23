@@ -1,0 +1,138 @@
+class SniperAmmo:ammo //20047
+{
+  Default
+  {
+  Inventory.PickupMessage "Picked up sniper ammo."; // "Picked up a clip."
+  Inventory.Amount 30;
+  Inventory.MaxAmount 100;
+  Ammo.BackpackAmount 10;
+  Ammo.BackpackMaxAmount 200;
+  scale 0.5;
+  radius 16;
+  Inventory.Icon "GSNAB0";
+  }
+  States
+  {
+  Spawn:
+    GSNA A -1;
+    Stop;
+  }
+
+
+}
+class FlameThrowerAmmo:ammo// 20016
+{
+  Default
+  {
+  Inventory.PickupMessage "Picked up flamethrower ammo."; // "Picked up a clip."
+  Inventory.Amount 400;
+  Inventory.MaxAmount 1000;
+  Ammo.BackpackAmount 200;
+  Ammo.BackpackMaxAmount 2000;
+  radius 16;
+  scale 1.1;
+  Inventory.Icon "WEFAA0";
+  }
+  States
+  {
+  Spawn:
+    WEFA A -1;
+    Stop;
+  }
+
+
+}
+class MarauderGreanadeAmmo:ammo //20017
+{
+  Default
+  {
+  Inventory.PickupMessage "Picked up marauder grenade ammo."; // "Picked up a clip."
+  Inventory.Amount 20;
+  Inventory.MaxAmount 75;
+  Ammo.BackpackAmount 10;
+  Ammo.BackpackMaxAmount 150;
+  radius 16;
+  scale 0.8;
+  Inventory.Icon "WEMAA0";
+  }
+  States
+  {
+  Spawn:
+    WEMA A -1;
+    Stop;
+  }
+
+
+}
+class ReaperPistolAmmo:ammo //20018
+{
+  Default
+  {
+  Inventory.PickupMessage "Picked up reaper pistol ammo."; // "Picked up a clip."
+  Inventory.Amount 20;
+  Inventory.MaxAmount 100;
+  Ammo.BackpackAmount 20;
+  Ammo.BackpackMaxAmount 200;
+  radius 16;
+  scale 0.8;
+  Inventory.Icon "WEMAA0";
+  }
+  States
+  {
+  Spawn:
+    WERA A -1;
+    Stop;
+  }
+
+
+}
+class ReaperGranadeAmmo:ammo 
+{
+  Default
+  {
+  Inventory.PickupMessage "Picked up reaper granades." ;// "Picked up a clip."
+  Inventory.Amount 4;
+  Inventory.MaxAmount 30;
+  Ammo.BackpackAmount 2;
+  Ammo.BackpackMaxAmount 60;
+  radius 16;
+  scale 0.2;
+  Inventory.Icon "GRADA0";
+  }
+  States
+  {
+	Spawn:
+	GRAS A -1;
+	Stop;
+	PickUp:
+	Gras A 00 A_GiveInventory("ReaperGranade",1);
+	stop;
+  
+  }
+
+
+}
+
+class SpiderMineAmmo:ammo //20044
+{
+  Default
+  {
+  Inventory.PickupMessage "Picked up a spider mine."; // "Picked up a clip."
+  Inventory.Amount 1;
+  Inventory.MaxAmount 15;
+  Ammo.BackpackAmount 2;
+  Ammo.BackpackMaxAmount 30;
+  radius 16;
+  scale 2;
+  Inventory.Icon "SPIAA0";
+  }
+  States
+  {
+	Spawn:
+	SPII A -1;
+	Stop;
+	PickUp:
+	Gras A 00 A_GiveInventory("SpiderMineWeapon",1);
+	stop;
+  } 
+}

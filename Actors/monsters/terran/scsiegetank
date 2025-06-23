@@ -1,0 +1,188 @@
+Actor StarcraftSiegeTank:HighTierMech 20007
+{
+
+	Health 500
+	Radius 64
+	Height 64
+	meleerange 200
+	scale 1.5
+	DropItem "BigHealth"
+	DamageFactor "SCRocketTank",0
+	DamageFactor "SCSiegeRocketTank",0
+	mass 800
+	MissileHeight 32
+	Obituary "%o was killed by a Siegetank"
+	Speed 5
+	Species "scsiegetank"	
+	MinMissileChance 20
+	+BOSSDEATH
+	+NOINFIGHTING
+	+NOBLOOD
+	+DONTHARMCLASS
+	+DontHurtSpecies
+	SeeSound "SiegT/Allerts"
+	DeathSound "SCThor/Death"
+
+States
+{
+	Spawn:
+	SIGS K 0
+	SIGI A 0 A_JumpIfInventory("Spawn2Token",1,"Spawn2")
+	SIGI A 0 A_giveInventory("Spawn2Token",1)
+	SIGI A 0 ACS_NamedExecute("TakeHealTokenOnDamagedHP",0)
+	Goto Spawn2
+	
+	Spawn2:
+	SIGI A 0
+	SIGI A 0 A_JumpIfInventory("SiegeToken",1,"Spawn3")
+	SIGS K 8 A_Look	
+	Loop	
+
+	Spawn3:
+	SIGS A 8 A_Look	
+	Loop
+	
+	See:
+	SIGI AA 0 A_JumpIfInventory("SiegeToken",1,"WaitingForEnemySiegeMode")
+	SIGM ABCD 1 A_Chase("Shoot","Shoot")
+	MADM A 0 A_jump(50,"SiegeUp")
+	Loop
+
+	Shoot:
+	MADM A 0 A_jump(50,"SiegeUp")
+	SIGS K 8 A_FaceTarget
+	SIGS A 0 A_Playsound("SiegT/Shoot1")
+	SIGS MNO 2
+	SIGS P 2 Bright A_CustomMissile("SCRocketTank",60,0,0)
+	SIGS QRST 2 
+	SIGS K 8 
+	Goto See
+	
+	Pain.PlayerHook:
+	SIGI A 0
+	SIGI A 0 A_JumpIfInventory("SiegeToken",1,"PainHookSiege")
+	SIGS K 64
+	Goto See
+
+	PainHookSiege:
+	SIGI A 0
+	SIGS A 64
+	Goto WaitingForEnemySiegeMode
+
+	WaitingForEnemySiegeMode:
+	SCMR AA 0 A_JumpIfTargetInsideMeleeRange("SiegeDown")
+	SIGI B 0 A_JumpIfInTargetLOS("SiegeShoot")
+	SIGS A 16 A_Jump(20,"ChanceSiegeDown")
+	goto WaitingForEnemySiegeMode
+	
+	ChanceSiegeDown:
+	SCMR A 0 A_CheckSight("SiegeDown")
+	Goto WaitingForEnemySiegeMode
+	
+	SiegeShoot:
+	SCMR A 0 A_JumpIfTargetInsideMeleeRange("SiegeDown")
+	MADA A 0 A_Playsound("SiegT/Shoot2")
+	SIGS A 8
+	SIGS B 4 A_FaceTarget
+	SIGS C 2
+	SIGS D 8 Bright A_CustomMissile("SCSiegeRocketTank",60,0,0)
+	SIGS EFGHIJ 4
+	SIGS A 32
+	goto WaitingForEnemySiegeMode
+		
+	SiegeUp:
+	SCMR A 0 A_JumpIfTargetInsideMeleeRange("Shoot")
+	SIGI A 0 A_Playsound("SiegT/SiegeUp")
+	SIGI A 0 A_giveInventory("SiegeToken",1)
+	SIGS K 12
+	SIGT ABCDEFGHIJKLMNOPQRSTUVWXYZ 5
+	goto WaitingForEnemySiegeMode
+	
+	SiegeDown:
+	SIGI A 0 A_Playsound("SiegT/SiegeDown")
+	SIGS A 13 
+	SIGI A 0 A_takeinventory("SiegeToken",1)
+	SIGT ZYXWVUTSRQPONMLKJIHGFEDCBA 5
+	goto See
+		
+	Death:
+	SIGD A 0 A_SCREAM
+	SCMI B 0 A_giveInventory("NeedHealingToken",1)
+	SCMI B 0 A_JumpIfInventory("SiegeToken",1,"DeathSiegeMode")
+	SIGD ABCDDEF 2 A_CustomMissile("DeathExplosions",Random(30,70),Random(-40,40))
+	SIGD A 0 A_CustomMissile("GarbageSiegeTank1",90,40,30)
+	SIGD A 0 A_CustomMissile("GarbageSiegeTank1",90,-40,-30)
+	SIGD A 0 A_CustomMissile("GarbageSiegeTank1",90,40,90)
+	SIGD A 0 A_CustomMissile("GarbageSiegeTank1",90,-40,-90)
+	SIGD A 0 A_CustomMissile("GarbageSiegeTank2",90,0,5)
+	SIGD A 0 A_CustomMissile("GarbageSiegeTank3",90,10,-5)
+	SIGD F 0 A_NoBlocking
+	SIGD O -1 A_BossDeath      
+	stop
+	
+	DeathSiegeMode:
+	SIGD GHIJKLMN 2 A_CustomMissile("DeathExplosions",Random(30,70),Random(-40,40)) 
+	SIGD A 0 A_CustomMissile("GarbageSiegeTank1",90,40,30)
+	SIGD A 0 A_CustomMissile("GarbageSiegeTank1",90,-40,-30)
+	SIGD A 0 A_CustomMissile("GarbageSiegeTank1",90,40,90)
+	SIGD A 0 A_CustomMissile("GarbageSiegeTank1",90,-40,-90)
+	SIGD A 0 A_CustomMissile("GarbageSiegeTank2",90,0,5)
+	SIGD A 0 A_CustomMissile("GarbageSiegeTank3",90,10,-5)
+	SIGD N 0 A_NoBlocking
+	SIGD P -1 A_BossDeath      
+	stop
+}
+}
+
+
+Actor SCRocketTank : SCRocketMarauder
+{
+	damage (40)
+	ExplosionDamage 30
+	ExplosionRadius 30
+
+	Speed 20
+	FastSpeed 30
+	Species "scsiegetank"	
+	scale 0.5
+	DamageType SCRocketTank
+	
+	States
+	{
+	Spawn:
+	SIGP A 1 Bright 
+	MISL A 0 Bright A_CustomMissile("RocketTrail",Random(4,6),Random(-2,2))
+	Loop
+	
+	Death:
+	MISL B 8 Bright A_Explode
+	MISL C 6 Bright
+	MISL D 4 Bright 
+	Stop
+	}
+}
+Actor SCSiegeRocketTank : SCRocketMarauder
+{
+	damage (80)
+	ExplosionDamage 100
+	ExplosionRadius 150
+	Speed 25
+	FastSpeed 35
+	Species "scsiegetank"	
+	scale 0.7
+	DamageType SCSiegeRocketTank 
+	DeathSound "Banshee/Death"
+	States
+	{
+	Spawn:
+		SIGP B 1 Bright 
+		MISL A 0 Bright A_CustomMissile("RocketTrail",Random(4,6),Random(-2,2))
+		
+		Loop
+	Death:
+		MISL B 8 Bright A_Explode
+		MISL C 6 Bright
+		MISL D 4 Bright 
+		Stop
+	}
+}

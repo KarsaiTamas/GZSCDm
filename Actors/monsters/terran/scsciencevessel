@@ -1,0 +1,102 @@
+Actor StarcraftSciencevessel:MidTierMech 20038
+{
+
+	Health 400
+	Radius 31
+	Height 56
+	meleerange 1200
+	scale 1.5
+	mass 400
+	+FLOAT
+	+NOGRAVITY
+	DropItem "MediumHealth"
+	MissileHeight 32
+	Obituary "%o was killed by a ScienceVessel"
+	PainChance 10
+	Speed 10
+	Species "scvessel"	
+	MinMissileChance 50
+	SeeSound "SciencVes/AllertS"
+	DeathSound "SciencVes/Death"
+	
+States
+{
+	Spawn:
+	SCII A 0
+	SCII A 0 A_JumpIfInventory("Spawn2Token",1,"Spawn2")
+	SCII A 0 A_giveInventory("Spawn2Token",1)
+	SCII A 0 A_giveInventory("EnergyTokenGhost",75)
+	SCII A 0 ACS_NamedExecute("TakeHealTokenOnDamagedHP",0)
+	SCII A 0 ACS_NamedExecute("EnergyGain",0)
+	goto Spawn2	
+	
+	Spawn2:
+	SCII A 0
+	SCII ABCD 2 A_Look	
+	loop
+	
+	See:
+	SCII A 0
+	SCII A 0 A_Chase("Attack")
+	SCII AABBCCDD 2 A_wander
+	Loop
+	
+	Attack:
+	SCII A 0
+	SCII A 0 A_JumpIfInventory("EnergyTokenGhost",30,"Poison")
+	goto see
+	
+	Poison:
+	SCII BC 4 A_FaceTarget
+	SCII D 4 
+	SCIS A 4 Bright A_CustomMissile("SCPoisonSciencevessel",50,30,0)
+	SCII A 0 A_takeInventory("EnergyTokenGhost",30)
+	SCII A 4
+	goto see
+	
+	Pain.PlayerHook:
+	SCII A 0
+	SCII ABCDABCDABCDABCD 4
+	Goto See
+	
+	Death:
+    SCID A 0 A_SCREAM
+	SCMI B 0 A_giveInventory("NeedHealingToken",1)
+    SCID B 0 A_SetTranslucent(1,0)
+    SCID AABBCC 4 A_CustomMissile("DeathExplosions",random(40,60),Random(-20,20))
+    SCID D 8 A_NoBlocking 
+    stop
+}
+}
+
+Actor SCPoisonSciencevessel : DoomImpBall
+{
+		damage (5)
+		PoisonDamage 5,10
+		
+		 Projectile
+		-THRUSPECIES
+		+NOGRAVITY
+		 -RANDOMIZE
+		Speed 30
+		FastSpeed 40
+		RenderStyle "Translucent"
+		+HITTARGET
+		seesound ""
+		deathsound "SciencVes/ShootS2"
+		scale 0.3
+	DamageType SCRocketMarauder
+	States
+	{
+	Spawn:
+		MADP A 1 Bright 
+		MISL A 0 Bright A_CustomMissile("RocketTrail",Random(4,6),Random(-2,2))
+		
+		Loop
+	Death:
+		MISL B 8 Bright
+		MISL C 6 Bright
+		MISL D 4 Bright 
+		Stop
+	}
+}

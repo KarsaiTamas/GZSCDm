@@ -1,0 +1,343 @@
+class Base:Actor
+{
+	bool isMechanical;
+	bool canBeHealed;
+	bool canMove; 
+	bool canStagger;
+	int team;
+	int marauderSlow;
+	bool isMarauderSlowed;
+	bool isFlying;
+	float curEnergy;
+	float maxEnergy;
+	bool canRegenEnergy;
+	bool isInvisible;
+	override void PostBeginPlay()
+	{
+		super.PostBeginPlay();
+		canMove=true; 
+		canStagger=true;
+		canBeHealed=false;
+		isMechanical=true;
+		isMarauderSlowed=false;
+		isFlying=false;
+		curEnergy=0;
+		maxEnergy=0;
+		canRegenEnergy=false;
+		isInvisible=false;
+	}
+	
+Default
+	{
+	MONSTER;
+	GibHealth 10;
+	PainChance 50; 
+	alpha 1;
+	Gravity 1;
+	SeeSound "";
+	DeathSound "";
+	AttackSound "";
+	PainChance "PlayerHook", 255;
+	Reactiontime 8;
+	}
+	
+	override void Die(Actor source, Actor inflictor, int dmgflags, Name MeansOfDeath)
+	{
+		canBeHealed=false;
+		super.Die(source, inflictor, dmgflags, MeansOfDeath);
+	}
+	void ActionTest(string test)
+	{
+		Console.Printf(test);
+	}
+	override void Tick()
+	{
+		super.Tick();
+		if(marauderSlow>0)
+		{
+			marauderSlow--;
+			if(marauderSlow<=0)
+			{
+				self.speed*=2;
+				isMarauderSlowed=false;
+			}
+		}
+		if(canRegenEnergy)
+		{
+			if(curEnergy<maxEnergy)
+			{
+				curEnergy+=0.05;
+			}
+			else
+			{
+				curEnergy=maxEnergy;
+			}
+		}
+	}
+	void SetFly(bool setFly)
+	{
+		isFlying=setFly;
+		A_ChangeFlag("FLOAT",setFly);
+		A_ChangeFlag("NOGRAVITY",setFly);
+	}
+
+} 
+
+class GarbageBase:Actor
+{
+	Default
+	{
+
+	//RenderStyle Normal;
+	alpha 1;
+	SeeSound "";
+	DeathSound "";
+	AttackSound "";
+	BounceCount 8;
+	+THRUGHOST
+	-DONTSPLASH
+	+THRUACTORS
+	+MISSILE
+	WallBounceFactor 0.16;
+	BounceFactor 0.36;
+	speed 30;
+	Gravity 0.3;
+	+BOUNCEONCEILINGS
+	+BOUNCEONFLOORS
+	+BOUNCEONWALLS
+	
+	}
+
+}
+class GibletsBounce:GarbageBase
+{
+	Default
+	{
+
+	speed 5;
+	}
+
+}
+
+class GibletsNoBounce:GibletsBounce
+{
+	Default
+	{
+	-BOUNCEONCEILINGS
+	-BOUNCEONFLOORS
+	-BOUNCEONWALLS
+	BounceCount 0;
+	}
+
+}
+
+class TerranHumanoid:Base
+{
+	bool isStimmed;
+	const stimDuration=6*35;
+	int stimTimer;
+	Default
+	{
+	BloodType "Blood", "BloodSplatter", "AxeBlood";
+	DamageFactor "Melee",1;
+	DamageFactor "Normal",1;
+	DamageFactor "SCMedicBeam",0;
+	DamageFactor "PlayerMarineWeapon",1;
+	DamageFactor "PlayerSnipe",1;
+	DamageFactor "PlayerSniperShot",2;
+	DamageFactor "PlayerFlame",2;
+	DamageFactor "PlayerPistolShot",1.7;
+	DamageFactor "PlayerMarauderRocketShot",1;
+	DamageFactor "PlayerReaperGranade",1.5;
+	DamageFactor "PlayerSpectreRifle",1.2;
+	DamageFactor "PlayerSlugShot",1;
+	DamageFactor "FriendlyMine",1;
+	DamageFactor "PickupMine",0;
+	
+	
+	}
+	void UseStim()
+	{
+		if(health<21)
+		{
+			return;
+		}
+		
+		health-=10;
+		canStagger=false;
+		isStimmed=true;
+		A_PlaySound("SCSTIM/STIMUP",0);
+		stimTimer=stimDuration;
+		//Console.Printf("\cf used stim %d stim timer",stimTimer); 
+		speed*=2;
+	} 
+	override void PostBeginPlay()
+	{
+		super.PostBeginPlay();
+		isMechanical=false;
+		isStimmed=false; 
+		stimTimer=0;
+		canBeHealed=true;
+	}
+	override void Tick()
+	{
+		super.Tick();
+		if (!IsFrozen())
+		{
+			if(isStimmed)
+			{
+				stimTimer--;
+				if(stimTimer<0)
+				{
+					isStimmed=false;
+					stimTimer=0;
+					speed/=2;
+				}
+			}
+		}
+	}
+}
+
+class LowTierHumanoid:TerranHumanoid 
+{
+	Default
+	{
+	DropItem "SmallHealth";
+	Reactiontime 12;
+
+	}
+}
+class MidTierHumanoid:TerranHumanoid 
+{
+	Default
+	{
+	DropItem "MediumHealth";
+	Reactiontime 10;
+	}
+}
+class HighTierHumanoid:TerranHumanoid
+{
+	Default
+	{
+	DropItem "BigHealth";
+	Reactiontime 8;
+	}
+}
+
+class ZergLight:Base
+{
+	Default
+	{
+	BloodType "Blood", "BloodSplatter", "AxeBlood";
+	DamageFactor "Melee",1;
+	DamageFactor "Normal",1;
+	DamageFactor "SCMedicBeam",0;
+	DamageFactor "PlayerMarineWeapon",1;
+	DamageFactor "PlayerSnipe",1;
+	DamageFactor "PlayerSniperShot",2;
+	DamageFactor "PlayerFlame",2;
+	DamageFactor "PlayerPistolShot",1.7;
+	DamageFactor "PlayerMarauderRocketShot",1;
+	DamageFactor "PlayerReaperGranade",1.5;
+	DamageFactor "PlayerSpectreRifle",1.2;
+	DamageFactor "PlayerSlugShot",1;
+	DamageFactor "FriendlyMine",1;
+	DamageFactor "PickupMine",0;
+	
+	}
+	override void PostBeginPlay()
+	{
+		super.PostBeginPlay();
+		isMechanical=false;
+		canBeHealed=true;
+	}
+}
+
+class ZergHeavy:Base
+{
+	Default
+	{
+	BloodType "Blood", "BloodSplatter", "AxeBlood";
+	DamageFactor "Melee",1;
+	DamageFactor "Normal",1;
+	DamageFactor "SCMedicBeam",0;
+	DamageFactor "PlayerMarineWeapon",1;
+	DamageFactor "PlayerSnipe",1;
+	DamageFactor "PlayerSniperShot",2;
+	DamageFactor "PlayerFlame",1;
+	DamageFactor "PlayerPistolShot",1.7;
+	DamageFactor "PlayerMarauderRocketShot",5;
+	DamageFactor "PlayerReaperGranade",5;
+	DamageFactor "PlayerSpectreRifle",6;
+	DamageFactor "PlayerSlugShot",3;
+	DamageFactor "FriendlyMine",3;
+	DamageFactor "PickupMine",0;
+	}
+	override void PostBeginPlay()
+	{
+		super.PostBeginPlay();
+		isMechanical=false;
+		canBeHealed=true;
+	}
+	
+}
+
+class TerranMech:Base
+{
+	
+	Default
+	{
+	DamageFactor "Melee",1;
+	DamageFactor "Normal",1;
+	DamageFactor "SCMedicBeam",0;
+	DamageFactor "PlayerMarineWeapon",1.5;
+	DamageFactor "PlayerSnipe",0.3;
+	DamageFactor "PlayerSniperShot",0.5;
+	DamageFactor "PlayerFlame",1;
+	DamageFactor "PlayerPistolShot",1;
+	DamageFactor "PlayerMarauderRocketShot",5;
+	DamageFactor "PlayerReaperGranade",5;
+	DamageFactor "PlayerSpectreRifle",6;
+	DamageFactor "PlayerSlugShot",3;
+	DamageFactor "FriendlyMine",3;
+	DamageFactor "PickupMine",0;
+	GibHealth 1000;
+	+NOBLOOD
+	}
+	override void PostBeginPlay()
+	{
+		super.PostBeginPlay();
+		isMechanical=true;
+		canBeHealed=false;
+	}
+}
+class LowTierMech:TerranMech 
+{
+	Default
+	{
+	DropItem "SmallHealth";
+	Reactiontime 12;
+	}
+}
+class MidTierMech:TerranMech 
+{
+	Default
+	{
+	DropItem "MediumHealth";
+	Reactiontime 10;
+	}
+}
+class HighTierMech:TerranMech
+{
+	Default
+	{
+	DropItem "BigHealth";
+	Reactiontime 8;
+	}
+}
+
+
+
+
+
+

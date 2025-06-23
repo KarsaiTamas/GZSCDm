@@ -1,0 +1,131 @@
+ACTOR YamatoCannon : Weapon 20052
+{
+   Weapon.SelectionOrder 700
+   Weapon.AmmoUse 1
+   Weapon.AmmoGive 0
+   Weapon.AmmoUse2 0
+   Weapon.AmmoGive2 100
+   +WEAPON.AMMO_CHECKBOTH
+   Weapon.slotnumber 7
+   Weapon.AmmoType "YamatoAmmoToken"
+   Weapon.AmmoType2 "Cell"
+   radius 16
+   scale 0.1
+   activesound "Yamato/idle"
+   Inventory.PickupMessage "You got the Yamato Cannon!" // "You got the chaingun"
+   Obituary "$OB_MPCHAINGUN" // "%o was mowed down by %k's chaingun."
+   Tag "Yamato Cannon"
+   +WEAPON.NOALERT
+   States
+   {
+	Ready:
+	WEAA A 0 A_PlaySound("Yamato/idle",6,1.0,1)
+	YAMA AABCDEFGAABCDEFG 1 A_WeaponReady
+	WEAA B 0 A_JumpIfInventory("YamatoToken",2,"Reload")	
+	Loop
+	
+	Deselect:
+	YAMA A 1 A_Lower
+	DEVG A 0 A_StopSound(6)
+	Loop
+	
+	Select:	
+	YAMA A 1 A_Raise
+	Loop
+	
+	Fire:
+	WEAA B 0 A_StopSound(6)
+	YAMA A 0 A_AlertMonsters
+	WEAA B 0 A_JumpIfInventory("YamatoAmmoToken",0,"ResetToken")	
+	WEAA B 0 A_JumpIfInventory("YamatoToken",2,"Reload")	
+	FireContinue:
+	WEAA B 0 A_GiveInventory("YamatoToken",1)
+	YAMA A 0 A_PlaySound("BattleCru/ShootS2",0)
+	YAMA BCDEFGBCDEFGBCDEFGBCDEFG 2 Radius_Quake(1,2,0,1,0)
+	YAMA A 0 A_GunFlash
+	YAMA A 0 A_PlaySound("BattleCru/ShootS3",0)
+	YAMA H 2 Bright A_FireCustomMissile("PlayerYamatoShot",0,1,0)
+	YAMA A 0 A_Recoil(15)
+	YAMA IJK 2
+	YAMA JIHA 2
+	WEAA B 0 A_JumpIfInventory("YamatoToken",2,"Reload")	
+	Goto Ready
+	ResetToken:
+	WEAA A 0 A_TakeInventory("YamatoToken",2)
+	Goto FireContinue
+	
+	Reload:
+	WEAA B 0 A_StopSound(6)
+	WEAA B 0 A_JumpIfInventory("Cell",99,2)	
+	WEAA B 0 A_Jump(256,"Ready")	
+	WEAA A 0 A_TakeInventory("YamatoToken",2)
+	WEAA A 0 A_PlaySound("Yamato/ReloadS",0)
+	YAMR ABCDEFGHIJK 2 
+	WEAA A 0 A_PlaySound("Yamato/Open",0)
+	YAMR LMNOPQRSTUV 2
+	WEAA B 0 A_GiveInventory("YamatoAmmoToken",2)
+	WEAA A 0 A_TakeInventory("Cell",100)
+	YAMR WX 2
+	YAMR Y 0 A_PlaySound("Yamato/Close",0)
+	YAMR YZ 2 
+	YAMT ABCD 2
+	Goto Ready
+	
+	Spawn:
+    YAMS ABCDEF 2
+	TNT1 A 0 A_LoopActiveSound
+	Loop
+	Pickup:
+	TNT1 A 0 A_StopSound
+	stop
+   }
+}
+Actor PlayerYamatoShot : SCYamatocannon
+{
+		damage (2000)
+		 Projectile
+		-THRUSPECIES
+		+NOGRAVITY
+		 -RANDOMIZE
+		Speed 30
+		radius 16
+		RenderStyle "Translucent"
+		seesound ""
+		deathsound "SCMad/ShootE"
+		DamageType PlayerYamatoShot
+		scale 1
+	States
+	{
+	Spawn:
+		BATP A 1 Bright 
+		BATP A 0 Bright A_CustomMissile("PlayerYamatoShotTrail",Random(4,6),Random(-2,2),90)
+		BATP A 0 Bright A_CustomMissile("PlayerYamatoShotTrail",Random(4,6),Random(-2,2),-90)
+		BATP A 1 Bright A_Explode(200,150,0,0,150)
+		Loop
+	Death:
+		MISL B 8 Bright A_Explode(250,512,0,0,512)
+		MISL C 6 Bright
+		MISL D 4 Bright 
+		//IAAA A 0 A_GiveToTarget("MarauderSlowToken", 1)
+		Stop
+	}
+}
+Actor PlayerYamatoShotTrail:PlayerYamatoShot
+{
+damage(0)
+Speed 5
+radius 4
+scale 0.3
+Gravity 2.4
+States
+	{
+	Spawn:
+		BATP AAAAAAAAAA 1 Bright 
+	Death:
+		MISL B 2 Bright 
+		MISL C 4 Bright
+		MISL D 1 Bright 
+		Stop
+	}
+}
+

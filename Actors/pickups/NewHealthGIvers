@@ -1,0 +1,19 @@
+Actor HealthPotion2: HealthBonus replaces HealthBonus
+{
+ Inventory.MaxAmount 300
+}
+
+Actor Medikit2:Medikit replaces Medikit
+{
+ Inventory.MaxAmount 150
+}
+
+Actor Stimpack2:Stimpack replaces Stimpack
+{
+ Inventory.MaxAmount 150
+}
+
+Actor Soulsphere2:Soulsphere replaces Soulsphere
+{
+ Inventory.MaxAmount 300
+}

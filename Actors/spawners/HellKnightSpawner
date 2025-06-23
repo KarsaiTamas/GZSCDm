@@ -1,0 +1,22 @@
+actor HellKnightSpawner : RandomSpawner Replaces HellKnight 
+{
+
+DropItem "HellKnightTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+}
+
+actor HellKnightTerranSpawner : RandomSpawner 
+{
+
+DropItem "StarcraftGoliath", 256, 150
+}
+actor HellKnightProtossSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}
+actor HellKnightZergSpawner : RandomSpawner 
+{
+//DropItem "PlasmaGunner", 256, 61
+}

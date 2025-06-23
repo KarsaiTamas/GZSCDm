@@ -1,0 +1,22 @@
+actor LostSoulRandomSpawner : RandomSpawner Replaces LostSoul 
+{
+
+DropItem "LostSoulTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+}
+
+actor LostSoulTerranSpawner : RandomSpawner 
+{
+DropItem "StarcraftSeekerMissile", 256, 150
+}
+actor LostSoulProtossSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}
+actor LostSoulZergSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}

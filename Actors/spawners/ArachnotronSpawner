@@ -1,0 +1,22 @@
+actor ArachnotronSpawner : RandomSpawner Replaces Arachnotron 
+{
+
+DropItem "ArachnotronTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+//DropItem "ZombiemanTerranSpawner", 256, 100
+}
+
+actor ArachnotronTerranSpawner : RandomSpawner 
+{
+
+DropItem "StarcraftSiegetank", 256, 150
+}
+actor ArachnotronProtossSpawner : RandomSpawner 
+{
+
+//DropItem "PlasmaGunner", 256, 61
+}
+actor ArachnotronZergSpawner : RandomSpawner 
+{
+//DropItem "PlasmaGunner", 256, 61
+}

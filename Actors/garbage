@@ -1,0 +1,175 @@
+Actor GarbageSiegeTank1:GarbageBase
+{
+	scale 0.8
+	states
+	{
+	
+	Spawn:
+	
+	GARA ABCDEFGHI 2
+	Loop
+	
+	Death:
+	GARA I -1
+	stop
+	}
+}
+
+Actor GarbageSiegeTank2:GarbageBase
+{
+	scale 1.5
+	states
+	{
+	
+	Spawn:
+	GARB ABCDEFGHI 2
+	Loop
+	
+	Death:
+	GARB B -1
+	stop
+	}
+}
+
+Actor GarbageSiegeTank3:GarbageBase
+{
+	scale 1.5
+	states
+	{
+	
+	Spawn:
+	GARC ABCDEFGHI 2
+	Loop
+	
+	Death:
+	GARC A -1
+	stop
+	}
+}
+
+Actor MutaliskLeftSide:GibletsNoBounce
+{
+	scale 0.8
+	states
+	{
+	
+	Spawn:
+	MUTR A 0
+	
+	MUTL ABCDEF 2
+	goto Death
+	
+	Death:
+	MUTL G -1
+	stop
+	}
+}
+
+Actor MutaliskRightSide:GibletsNoBounce
+{
+	scale 0.8
+	states
+	{
+	
+	Spawn:
+	MUTR A 0
+	MUTR ABCDEF 2
+	goto Death
+	Death:
+	
+	MUTR G -1
+	stop
+
+	}
+}
+
+Actor MutaliskHead:GibletsBounce
+{
+	scale 0.8
+	states
+	{
+	
+	Spawn:
+	MUTH ABCDEFGHI 2
+	Death:
+	MUTH I -1
+	stop
+	}
+}
+
+Actor MutaliskLeftWing:GibletsBounce
+{
+	scale 0.8
+	states
+	{
+	
+	Spawn:
+	MUTW ABCDEFG 2
+	Death:
+	MUTW C -1
+	stop
+	}
+}
+Actor MutaliskRightWing:GibletsBounce
+{
+	scale 0.8
+	states
+	{
+	
+	Spawn:
+	MUTW HIJKLMN 2
+	Death:
+	MUTW J -1
+	stop
+	}
+}
+Actor MutaliskShootingSpot:GibletsBounce
+{
+	scale 0.8
+	states
+	{
+	
+	Spawn:
+	MUTW OPQRSTU 2
+	Death:
+	MUTW O -1
+	stop
+	}
+}
+
+Actor RoachGib1:GibletsBounce
+{
+	scale 0.3
+	states
+	{
+	Spawn:
+	ROAZ ABCDEFGHIJK 2
+	Death:
+	ROAZ L -1
+	stop
+	}
+}
+Actor RoachGib2:GibletsBounce
+{
+	scale 0.3
+	states
+	{
+	Spawn:
+	ROAY ABCDEFGHIJK 2
+	Death:
+	ROAY L -1
+	stop
+	}
+}
+Actor RoachGib3:GibletsBounce
+{
+	scale 0.3
+	states
+	{
+	Spawn:
+	ROAW ABCDEFGHIJK 2
+	Death:
+	ROAW L -1
+	stop
+	}
+}
