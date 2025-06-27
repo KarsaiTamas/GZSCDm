@@ -1,4 +1,4 @@
-actor PainElementalRandomSpawner : RandomSpawner Replaces PainElemental 
+/*actor PainElementalRandomSpawner : RandomSpawner Replaces PainElemental 
 {
 
 DropItem "PainElementalTerranSpawner", 256, 100
@@ -20,4 +20,4 @@ actor PainElementalZergSpawner : RandomSpawner
 {
 
 //DropItem "PlasmaGunner", 256, 61
-}
+}*/

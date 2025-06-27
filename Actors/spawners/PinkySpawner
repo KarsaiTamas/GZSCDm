@@ -1,4 +1,4 @@
-actor PinkyRandomSpawner Replaces Demon 
+/*actor PinkyRandomSpawner Replaces Demon 
 {
  states
   {
@@ -47,4 +47,4 @@ actor PinkyZergSpawner : RandomSpawner
 {
 
 DropItem "StarcraftRoach", 256, 150
-}
+}*/

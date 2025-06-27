@@ -1,0 +1,104 @@
+class StarcraftFirebat:MidTierHumanoid //20005
+{
+	Default
+	{
+	Health 150;
+	Radius 30;
+	Height 56;
+	meleerange 200;
+	DropItem "FlameThrowerWeapon";
+	DropItem "FlameThrowerAmmo";
+	DamageFactor "Flame",0;
+	DamageFactor "PlayerFlame",0.8;
+	
+	DropItem "MediumHealth";
+	mass 200;
+	MissileHeight 32;
+	Obituary "%o was killed by a firebat";
+	PainChance 50;
+	Speed 14;
+	Species "scfirebat"	;
+	MinMissileChance 1;
+	+MISSILEMORE;
+	+MISSILEEVENMORE;
+	SeeSound "Firebat/Allerts";
+	DeathSound "Firebat/Deaths";
+	AttackSound "Firebat/Shoot";
+	MaxTargetRange 200;
+	}
+	
+	override void PostBeginPlay()
+	{
+		super.PostBeginPlay();  
+		raceType=TERRAN_SC1;
+		
+	}
+States
+{
+	Spawn:
+	FIBI AB 8 A_Look;
+	Loop	;
+
+	See:
+	FIBM ABCD 4 A_Chase("Shoot","Shoot");
+	Loop;
+
+	Pain:
+	goto See;
+
+	Pain.PlayerHook:
+	FIBI A 0;
+	FIBI A 64;
+	Goto See;
+
+	Shoot:  
+	TNT1 A 0 A_JumpIfCloser(250,1);
+	Goto See;
+	FIBS A 0 A_FaceTarget;
+	FIBS A 0 A_Playsound("Firebat/Shoot");
+	FIBS BABABABABABABABABA 1 Bright A_CustomMissile("SCFlameFirebat",CallACS("ChoseMissleHorizontal",47,55,Random(1,2)),CallACS("ChoseMissleHorizontal",-25,25,Random(1,2)),0);
+	FIBS A 24 ;
+	Goto Shoot;
+	
+	Death:
+	FIBD A 8 A_SCREAM;
+	FIBD BCD 8  ;
+	FIBD E 8 A_NoBlocking;
+	FIBD F 8;
+	FIBD GGHH 4 A_CustomMissile("DeathExplosions",random(30,50),Random(-30,30)) ;
+	FIBD H -1 ;
+	stop;
+	   
+	Death.Fire:
+	Death.PlayerFlame:
+	Death.FirebatFlame:
+	Death.PlayerMarauderRocketShot:
+	Death.Extreme:
+	Death.FriendlyMine:
+	Death.MOD_ROCKET:
+	FIBE A 0 A_PlaySound("weapons/rocklx",5);
+	FIBE A 8 A_SCREAM;
+	FIBE B 8 A_NoBlocking;
+	FIBE C 8 ;
+	FIBE E 8;
+	FIBE E -1;
+	stop;
+}
+}
+
+class SCFlameFirebat : MagmaBreath
+{ 
+	Default
+	{
+
+		DamageType "Flame";
+	}
+    States 
+    { 
+    Spawn: 
+        FIR1 LKJIHGFEDCB 3 Bright A_Explode(Random(1,2),76);
+		FIR1 AA 2 Bright A_FadeOut(0.15);
+		Stop;
+	} 
+}
+

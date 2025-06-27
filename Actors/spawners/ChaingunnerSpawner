@@ -1,4 +1,4 @@
-actor ChaingunGuyRandomSpawner : RandomSpawner Replaces ChaingunGuy 
+/*actor ChaingunGuyRandomSpawner : RandomSpawner Replaces ChaingunGuy 
 {
 
 DropItem "ChaingunGuyTerranSpawner", 256, 100
@@ -21,4 +21,4 @@ actor ChaingunGuyZergSpawner : RandomSpawner
 {
 
 //DropItem "PlasmaGunner", 256, 61
-}
+}*/

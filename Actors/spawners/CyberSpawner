@@ -1,4 +1,4 @@
-actor CyberRandomSpawner : RandomSpawner Replaces Cyberdemon 
+/*actor CyberRandomSpawner : RandomSpawner Replaces Cyberdemon 
 {
 
 DropItem "CyberTerranSpawner", 256, 100
@@ -20,4 +20,4 @@ actor CyberZergSpawner : RandomSpawner
 {
 
 //DropItem "PlasmaGunner", 256, 61
-}
+}*/

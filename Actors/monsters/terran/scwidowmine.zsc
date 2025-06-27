@@ -20,6 +20,12 @@ class StarcraftWidowMine:LowTierMech //20037
 	-COUNTKILL;
 	}
 
+	override void PostBeginPlay()
+	{
+		super.PostBeginPlay();
+		raceType=TERRAN_SC2;
+		
+	}
 States
 {
 	Spawn:

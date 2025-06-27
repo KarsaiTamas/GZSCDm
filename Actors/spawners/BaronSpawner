@@ -1,4 +1,4 @@
-actor BaronSpawner : RandomSpawner Replaces BaronOfHell 
+/*actor BaronSpawner : RandomSpawner Replaces BaronOfHell 
 {
 DropItem "BaronTerranSpawner", 256, 100
 //DropItem "ZombiemanTerranSpawner", 256, 100
@@ -19,4 +19,4 @@ actor BaronProtossSpawner : RandomSpawner
 actor BaronZergSpawner : RandomSpawner 
 {
 //DropItem "PlasmaGunner", 256, 61
-}
+}*/

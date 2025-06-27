@@ -21,6 +21,13 @@ class StarcraftViking:MidTierMech //20035
 	SeeSound "Viking/Allerts";
 	DeathSound "Viking/Death";
 	}
+	
+	override void PostBeginPlay()
+	{
+		super.PostBeginPlay();
+		raceType=TERRAN_SC2;
+		
+	}
 States
 {
 	Spawn:
@@ -101,21 +108,21 @@ States
 	VIKS A 0 A_PlaySound("Viking/ShootS1");
 	VIKS A 8;
 	VIKS A 1 A_FaceTarget;
-	VIKS A 1 Bright A_CustomMissile("SCGoliathBullet",55,-20,0);
+	VIKS A 1 Bright A_CustomMissile("SCMarineBullet",55,-20,0);
 	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,-20,90);
-	VIKS B 1 Bright A_CustomMissile("SCGoliathBullet",55,20,0);
+	VIKS B 1 Bright A_CustomMissile("SCMarineBullet",55,20,0);
 	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,20,-90);
-	VIKS C 1 Bright A_CustomMissile("SCGoliathBullet",55,-20,0);
+	VIKS C 1 Bright A_CustomMissile("SCMarineBullet",55,-20,0);
 	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,-20,90);
-	VIKS D 1 Bright A_CustomMissile("SCGoliathBullet",55,20,0);
+	VIKS D 1 Bright A_CustomMissile("SCMarineBullet",55,20,0);
 	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,20,-90);
-	VIKS A 1 Bright A_CustomMissile("SCGoliathBullet",55,-20,0);
+	VIKS A 1 Bright A_CustomMissile("SCMarineBullet",55,-20,0);
 	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,-20,90);
-	VIKS B 1 Bright A_CustomMissile("SCGoliathBullet",55,20,0);
+	VIKS B 1 Bright A_CustomMissile("SCMarineBullet",55,20,0);
 	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,20,-90);
-	VIKS C 1 Bright A_CustomMissile("SCGoliathBullet",55,-20,0);
+	VIKS C 1 Bright A_CustomMissile("SCMarineBullet",55,-20,0);
 	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,-20,90);
-	VIKS D 1 Bright A_CustomMissile("SCGoliathBullet",55,20,0);
+	VIKS D 1 Bright A_CustomMissile("SCMarineBullet",55,20,0);
 	SCMA B 0 A_CustomMissile("MarineWeaponBulletShell",40,20,-90);
 	VIKI A 16;
 	VIKI B 8;
@@ -171,7 +178,7 @@ class SCViking : SCRocketMarauder
 	ExplosionRadius 64;
 	Speed 15;
 	FastSpeed 25;
-	DamageType "SCViking";
+	DamageType "Rocket";
 	deathsound "SCMad/ShootE";
 	scale 0.3;
 	}

@@ -11,9 +11,8 @@ class LivingActorsHandler:EventHandler
         int i=actors.GetMonsterSpawner(e.thing.GetClassName());
         //Console.Printf(e.thing.GetClassName());
 
-        if(i!=-1)
-        {
-            actors.monsterReplacers[i].GetSpawnActor();
+        if(i>-1)
+        { 
             let position= e.thing.pos;
             let monAngle= e.thing.angle;
 
@@ -53,11 +52,7 @@ class LivingActorsHandler:EventHandler
 			dest.pitch=source.pitch;
 		}
 		if(flags&TS_VEL)dest.vel=source.vel;
-	}
-    enum TransferSpecialsFlags{
-		TS_ANGLE=1,
-		TS_VEL=2,
-		TS_ALL=TS_ANGLE|TS_VEL,
+        dest.bAMBUSH=source.bAMBUSH;
 	}
     //////////
     override void WorldThingDestroyed(WorldEvent e)

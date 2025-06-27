@@ -26,6 +26,13 @@ class StarcraftMarauder:MidTierHumanoid //20001
 	DeathSound "SCMad/Deaths";
 	AttackSound "SCMAD/SHOOT";
 	}
+	
+	override void PostBeginPlay()
+	{
+		super.PostBeginPlay(); 
+		raceType=TERRAN_SC2;
+	
+	}
 States
 {
 	Spawn:
@@ -100,6 +107,12 @@ class SCRocketMarauder : Actor
 {
 	int marauderSlow;
  
+	override void PostBeginPlay()
+	{
+		super.PostBeginPlay();
+		marauderSlow=35*2; 
+	
+	}
 	Default
 	{
 
@@ -110,22 +123,17 @@ class SCRocketMarauder : Actor
 	+MTHRUSPECIES
 	+NOGRAVITY
 	-RANDOMIZE
-	Speed 30;
-	FastSpeed 40;
+	Speed 20;
+	FastSpeed 30;
 	+ZDOOMTRANS;
 	+HITTARGET
 	seesound "";
 	deathsound "SCMad/ShootE";
 	scale 0.3;
 	+MISSILE
-	DamageType "SCRocketMarauder";
+	DamageType "Rocket";
 	}
 	
-	override void PostBeginPlay()
-	{
-		super.PostBeginPlay();
-		marauderSlow=35*2;
-	}
 	void SlowMonster()
 	{
 

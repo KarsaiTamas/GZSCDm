@@ -28,26 +28,8 @@ class StarcraftBanshee:MidTierMech// 20020
 		SetFly(true);
 		curEnergy=30;
 		maxEnergy=200;
-	}
-	void ChangeStealth(bool visibility)
-	{
-		if(visibility)
-		{
-			if(curEnergy>100)
-			{
-				A_SetTranslucent(0.2,1);
-				A_playsound("SCHide/CloakOn");
-				canRegenEnergy=false;
-				isInvisible=true;
-			}
-		}
-		else
-		{
-			A_playsound("SCHide/CloakOff");
-			A_SetTranslucent(1,0);
-			canRegenEnergy=true;
-			isInvisible=false;
-		}
+		raceType=TERRAN_SC2;
+		
 	}
 	override void Tick()
 	{
@@ -72,23 +54,7 @@ States
 
 	See:
 	BSEM ABC 4 A_Chase("Shoot","Shoot");
-	BSEM A 0 
-	{
-		if(isInvisible)
-		{
-			if(!CheckSight(target))
-			{
-				ChangeStealth(false);
-			}
-		}
-		else
-		{
-			if(CheckSight(target))
-			{
-				ChangeStealth(true);
-			}
-		}
-	}
+	BSEM A 0 CheckForStealthChange();
 	Loop;
 
 
@@ -113,7 +79,7 @@ States
 	
 	Death:
     BSED A 0 A_SCREAM;
-    BSED B 0 A_SetTranslucent(1,0);
+    BSED B 0 ChangeStealth(false);
     BSED AABBCC 4 A_CustomMissile("DeathExplosions",random(40,60),Random(-20,20));
     BSED C 8 A_NoBlocking ;
     stop;
@@ -130,7 +96,7 @@ class SCBanshee : rocket
 		ExplosionRadius 64;
 		Speed 15;
 		FastSpeed 25;
-		DamageType "SCBanshee";
+		DamageType "Rocket";
 		SeeSound "";
 		deathsound "Banshee/ShootE";
 		scale 0.3;

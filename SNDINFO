@@ -1,0 +1,396 @@
+; stim
+SCSTIM/SCStim1 SCStim1
+SCSTIM/SCStim2 SCStim2
+SCSTIM/STIMUP STIMUPSOUND
+$RANDOM SCSTIM/STIMUP {SCSTIM/SCStim1 SCSTIM/SCStim2}
+
+;starcraft revolver
+Revolver/Shoot WEAASS
+Revolver/Reload1 WEAASR1
+Revolver/Reload2 WEAASR2
+Revolver/Reload3 WEAASR3
+; bullet
+
+Bullet/Impact1 SBULE1
+Bullet/Impact2 SBULE2
+Bullet/Impact3 SBULE3
+$RANDOM Bullet/ImpactS {Bullet/Impact1 Bullet/Impact2 Bullet/Impact3}
+$volume Bullet/ImpactS 0.5
+Bcase/Impact1 bcaseI1
+Bcase/Impact2 bcaseI2
+Bcase/Impact2 bcaseI3
+$RANDOM Bcase/ImpactS {Bcase/Impact1 Bcase/Impact2 Bcase/Impact3}
+Bcase/Impact3 bcaseI4
+
+;starcraft zerg burrow
+Zerg/UnBurrow SBURE
+Zerg/Burrow SBURS
+
+; starcraft marine
+
+SCMar/Allert SCMarA
+SCMar/Death1 SCMarD1
+SCMar/Death2 SCMarD2
+SCMar/Insult SCMarIn
+SCMAR/Deaths SCMARINEDS
+SCMAR/SHOOT1  SCMarSH1
+SCMAR/SHOOT2  SCMarSH2
+$RANDOM SCMAR/Deaths {SCMar/Death1 SCMar/Death2}
+
+; starcraft marauder
+
+SCMad/Death1 MADD1
+SCMad/Death2 MADD2
+$RANDOM SCMad/Deaths {SCMad/Death1 SCMad/Death2}
+SCMad/Allert1 MADA1
+SCMad/Allert2 MADA2
+$RANDOM SCMad/Allerts{SCMad/Allert1 SCMad/Allert2}
+SCMad/Shoot MADS
+SCMad/ShootE SMadSE
+
+;cloak
+SCHide/CloakOn CloakOn
+SCHide/CloakOff CloakOf
+
+;starcraft ghost
+
+SCGho/Allert SCGA
+SCGho/Death1 SCGD1
+SCGho/Death2 SCGD2
+$RANDOM SCGho/Deaths {SCGho/Death1 SCGho/Death2}
+SCGho/Shoot SCGS
+SCGho/Snipe SCGSn
+SCGho/SnipeE SCGSnE
+
+;starcraft medic
+
+SCMed/Heal SCMEDH
+SCMed/Death SCMEDD
+
+;starcraft thor
+
+SCThor/Allert1 ThorA1
+SCThor/Allert2 ThorA2
+SCThor/Allert3 ThorA3
+$RANDOM SCThor/Allerts {SCThor/Allert1 SCThor/Allert3}
+SCThor/Move ThorM
+SCThor/Death ThorD
+SCThor/SHOOT ThorS
+
+;starcraft firebat
+
+Firebat/Allert1 FIREBA1
+Firebat/Allert2 FIREBA2
+Firebat/Allert3 FIREBA3
+$RANDOM Firebat/Allerts {Firebat/Allert1 Firebat/Allert2 Firebat/Allert3}
+Firebat/Death1 FIREBD1
+Firebat/Death2 FIREBD2
+Firebat/Death3 FIREBD3
+$RANDOM Firebat/Deaths {Firebat/Death1 Firebat/Death2 Firebat/Death3}
+Firebat/Shoot FIREBS
+
+;starcraft reaper
+
+Reaper/Allert1 RepA1
+Reaper/Allert2 RepA2
+$RANDOM Reaper/Allerts {Reaper/Allert1 Reaper/Allert2}
+Reaper/Death1 RepD1
+Reaper/Death2 RepD2 
+$RANDOM Reaper/Deaths {Reaper/Death1 Reaper/Death2}
+Reaper/Shoot RepS
+Reaper/ShootE RepSE
+Reaper/GrenadeE RepGE
+$pitchshift Reaper/ShootE 5
+$volume Reaper/ShootE 0.5
+
+;starcraft siegetank
+
+SiegT/Allert1 siega1
+SiegT/Allert2 siega2
+$RANDOM SiegT/Allerts {SiegT/Allert1 SiegT/Allert2}
+SiegT/Shoot1 siegs1
+SiegT/Shoot2 siegs2
+SiegT/SiegeUp siegT1
+SiegT/SiegeDown siegT2
+
+;FlameThrower
+
+FlameT/Shoot2 FLPS2
+FlameT/Shoot3 FLPS3
+
+;starcraft goliath
+
+Goliath/Allert SGOLA
+Goliath/Death SGOLD
+Goliath/Shoot SGOLS
+Goliath/RocketE SGOLSE
+Goliath/ROcketS SGOLSS
+
+;starcraft vulture
+
+Vulture/Allert SVULA
+Vulture/Death1 SVULD1
+Vulture/Death2 SVULD2
+$RANDOM Vulture/Deaths {Vulture/Death1 Vulture/Death2}
+Vulture/AttackE1 SVULSE1
+Vulture/AttackE2 SVULSE2
+$RANDOM Vulture/AttackEs {Vulture/AttackE1 Vulture/AttackE2}
+Vulture/Shoot SVULSS
+
+;starcraft predator
+
+Predator/Allert1 SPREA1
+Predator/Allert2 SPREA2
+$RANDOM Predator/Allerts {Predator/Allert1 Predator/Allert2}
+Predator/Death SPRED
+Predator/ShootE SPRESE
+Predator/ShootS SPRESS
+
+;starcraft banshee
+
+Banshee/Allert1 SBSEA1
+Banshee/Allert2 SBSEA2
+$RANDOM Banshee/Allerts {Banshee/Allert1 Banshee/Allert2}
+Banshee/Death SBSED
+Banshee/ShootS SBSESS
+Banshee/ShootE SBSESE
+
+;starcraft cyclone
+
+Cyclone/Allert1 SCYCA1
+Cyclone/Allert2 SCYCA2
+$RANDOM Cyclone/Allerts {Cyclone/Allert1 Cyclone/Allert2}
+Cyclone/Lock SCYCL
+Cyclone/ShootS SCYCSS
+Cyclone/ShootE SCYCSE
+
+;starcraft spectre
+
+Spectre/Allert1 SSpeA1
+Spectre/Allert2 SSpeA2
+$RANDOM Spectre/Allerts{Spectre/Allert1 Spectre/Allert2}
+Spectre/Death1 SSpeD1
+Spectre/Death2 SSpeD2
+Spectre/Death3 SSpeD3
+$RANDOM Spectre/Deaths{Spectre/Death1 Spectre/Death2 Spectre/Death3}
+Spectre/ShootS SSpeSS
+Spectre/ShootE SSpeSE
+Spectre/PsyAS SSpePS
+Spectre/PsyAE SSpePE
+Spectre/GranSS SSpeGSS
+Spectre/GranSE SSpeGSE
+Spectre/GranST SSpeGST
+
+;starcraft warhound
+
+Warhound/Allert1 SWRHA1
+Warhound/Allert2 SWRHA2
+Warhound/Allert3 SWRHA3
+$RANDOM Warhound/Allerts{Warhound/Allert1 Warhound/Allert2 Warhound/Allert3}
+Warhound/Death SWRHD
+Warhound/ShootS SWRHSS
+Warhound/ShootE SWRHSE
+Warhound/ShootS1 SWRHSS1
+Warhound/ShootE1 SWRHSE1
+Warhound/Hit SWRHSH
+;sound effects
+
+Sound/Burn Burn
+
+;starcraft warbot
+
+Warbot/Allert1 SWRTA1
+Warbot/Allert2 SWRTA2
+Warbot/Allert3 SWRTA3
+$RANDOM Warbot/Allerts{Warbot/Allert1 Warbot/Allert2 Warbot/Allert3}
+Warbot/ShootS SWRTSS
+Warbot/ShootE SWRTSE
+
+;starcraft raven
+
+Raven/Allert SRAVA
+Raven/ShootM SRAVSM
+Raven/ShootT SRAVST
+Raven/ShootS SRAVSTS
+
+;starcraft seekermissile
+
+SeekerM/Allert SSEKA
+SeekerM/Seek SSEKS
+
+;starcraft autoturret
+
+AutoTurret/Allert STURA
+AutoTurret/Birth STURB
+AutoTurret/Death STURD
+AutoTurret/Land STURL
+AutoTurret/Shoot STURS
+
+;starcraft wraith
+
+Wraith/Allert1 SWRAA1
+Wraith/Allert2 SWRAA2
+Wraith/Allert3 SWRAA3
+$RANDOM Wraith/Allerts{Wraith/Allert1 Wraith/Allert2 Wraith/Allert3}
+Wraith/Death1 SWRAD1
+Wraith/Death2 SWRAD2
+Wraith/Death3 SWRAD3
+$RANDOM Wraith/Deaths{Wraith/Death1 Wraith/Death2 Wraith/Death3}
+Wraith/ShootS1 SWRASS1
+Wraith/ShootS2 SWRASS2
+Wraith/ShootE1 SWRASE1
+Wraith/ShootE2 SWRASE2
+
+;starcraft diamondback
+
+Diamondb/Allert1 SDIAA1
+Diamondb/Allert2 SDIAA2
+$RANDOM Diamondb/AllertS{Diamondb/Allert1 Diamondb/Allert2}
+
+;starcraft battlecruiser
+
+BattleCru/Allert SBATA
+BattleCru/ShootS1 SBATSS1
+BattleCru/ShootS2 SBATSS2
+BattleCru/ShootS3 SBATSS3
+BattleCru/ShootE SBATSE
+
+;starcraft viking
+
+Viking/Allert1 SVIKA1
+Viking/Allert2 SVIKA2
+Viking/Allert3 SVIKA3
+$RANDOM Viking/AllertS{Viking/Allert1 Viking/Allert2 Viking/Allert3}
+Viking/Death SVIKD
+Viking/ShootS1 SVIKSS1
+Viking/ShootS2 SVIKSS2
+Viking/Transf1 SVIKT1
+Viking/Transf2 SVIKT2
+
+;starcraft hellion
+
+Hellion/Allert1 SHELA1
+Hellion/Allert2 SHELA2
+$RANDOM Hellion/AllertS{Hellion/Allert1 Hellion/Allert2}
+Hellion/Death1 SHELD1
+Hellion/Death2 SHELD2
+$RANDOM Hellion/DeathS{Hellion/Death1 Hellion/Death2}
+Hellion/ShootS SHELSS
+Hellion/Transform SHELT1
+
+;starcraft herc
+
+Herc/Allert1 SHRCA1
+Herc/Allert2 SHRCA2
+Herc/Allert3 SHRCA3
+$RANDOM Herc/AllertS{Herc/Allert1 Herc/Allert2 Herc/Allert3}
+Herc/Death1 SHRCD1
+Herc/Death2 SHRCD2
+Herc/Death3 SHRCD3
+$RANDOM Herc/DeathS{Herc/Death1 Herc/Death2 Herc/Death3}
+Herc/Active SHRCAC
+Herc/ShootS1 SHRCSS1
+$volume Herc/ShootS1 0.5
+Herc/ShootS2 SHRCSS2
+Herc/ShootE2 SHRCSE2
+
+
+;starcraft liberator
+
+Liber/Allert1 SLIBA1
+Liber/Allert2 SLIBA2
+Liber/Allert3 SLIBA3
+$RANDOM Liber/AllertS{Liber/Allert1 Liber/Allert2 Liber/Allert3}
+Liber/Death SLIBD
+Liber/ShootS1 SLIBSS1
+Liber/ShootS2 SLIBSS2
+Liber/ShootE1 SLIBSE1
+Liber/ShootE2 SLIBSE2
+Liber/Transform1 SLIBT1
+Liber/Transform2 SLIBT2
+
+;starcraft spidermine
+
+Spiderm/ShootS SSPISS
+$volume Spiderm/ShootS 0.3
+Spiderm/Transform SSPIT
+
+;starcraft widowmine
+
+Widowmine/Allert1 SWIDA1
+Widowmine/Allert2 SWIDA2
+$RANDOM Widowmine/AllertS{Widowmine/Allert1 Widowmine/Allert2}
+Widowmine/Death SWIDD
+Widowmine/ShootS SWIDSS
+Widowmine/Transform1 SWIDTS
+Widowmine/Transform2 SWIDTE
+
+;starcraft sciencevessel
+
+SciencVes/Allert1 SSCIA1
+SciencVes/Allert2 SSCIA2
+$RANDOM SciencVes/AllertS{SciencVes/Allert1 SciencVes/Allert2}
+SciencVes/Death SSCID
+SciencVes/ShootS1 SSCISS1
+SciencVes/ShootS2 SSCISS2
+
+;starcraft zergling
+
+ZLing/Allert1 SZIGA1
+ZLing/Allert2 SZIGA2
+ZLing/Allert3 SZIGA3
+$RANDOM ZLing/AllertS{ZLing/Allert1 ZLing/Allert2 ZLing/Allert3}
+ZLing/Death SZIGD
+ZLing/ShootE SZIGSE
+
+;starcraft hidralisk
+
+Hidralisk/Allert1 SHIDA1
+Hidralisk/Allert2 SHIDA2
+Hidralisk/Allert3 SHIDA3
+$RANDOM Hidralisk/AllertS{Hidralisk/Allert1 Hidralisk/Allert2 Hidralisk/Allert3}
+Hidralisk/Death SHIDD
+Hidralisk/ShootS1 SHIDSS1
+Hidralisk/ShootS2 SHIDSS2
+$RANDOM Hidralisk/ShootS{Hidralisk/ShootS1 Hidralisk/ShootS2}
+Hidralisk/Melee SHIDMS
+Hidralisk/ShootE SHIDSE
+
+
+
+;starcraft mutalisk
+
+Mutalisk/Allert1 SMUTA1
+Mutalisk/Allert2 SMUTA2
+$RANDOM Mutalisk/AllertS{Mutalisk/Allert1 Mutalisk/Allert2}
+
+Mutalisk/Death SMUTD
+Mutalisk/ShootS SMUTSS
+Mutalisk/ShootE SMUTSE
+
+;starcraft yamatocannon
+
+Yamato/Open SYAMAOS
+Yamato/Close SYAMAOE
+Yamato/Idle SYAMAI
+Yamato/ReloadS SYAMARS
+
+;starcraft roach
+
+Roach/Allert1 SROAA1
+Roach/Allert2 SROAA2
+Roach/Allert3 SROAA3
+Roach/Allert4 SROAA4
+$RANDOM Roach/AllertS{Roach/Allert1 Roach/Allert2 Roach/Allert3 Roach/Allert4}
+
+Roach/Roam1 SROAR1
+Roach/Roam2 SROAR2
+Roach/Roam3 SROAR3
+$RANDOM Roach/RoamS{Roach/Roam1 Roach/Roam2 Roach/Roam3}
+
+Roach/Death1 SROAD1
+Roach/Death2 SROAD2
+Roach/Death3 SROAD3
+Roach/Death4 SROAD4
+$RANDOM Roach/DeathS{Roach/Death1 Roach/Death2 Roach/Death3 Roach/Death4}
+

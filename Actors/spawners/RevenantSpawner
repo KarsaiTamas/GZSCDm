@@ -1,4 +1,4 @@
-actor RevRandomSpawner : RandomSpawner Replaces Revenant 
+/*actor RevRandomSpawner : RandomSpawner Replaces Revenant 
 {
 
 DropItem "RevTerranSpawner", 256, 100
@@ -20,3 +20,4 @@ actor RevZergSpawner : RandomSpawner
 
 //DropItem "PlasmaGunner", 256, 61
 }//21048 21049 21050 21051
+*/

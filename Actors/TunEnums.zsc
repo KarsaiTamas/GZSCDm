@@ -1,0 +1,18 @@
+
+enum RaceEnum
+{
+    TERRAN_SC1,
+    TERRAN_SC2,
+    ZERG_SC1,
+    ZERG_SC2,
+    PROTOSS_SC1,
+    PROTOSS_SC2,
+    RACE_NONE,
+}
+
+enum TransferSpecialsFlags
+{
+    TS_ANGLE=1,
+    TS_VEL=2,
+    TS_ALL=TS_ANGLE|TS_VEL,
+}

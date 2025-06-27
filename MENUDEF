@@ -1,0 +1,35 @@
+OptionValue "Starcraft HUDS"
+{
+    1, "Terran"
+    2, "Zerg"
+    3, "Protoss"
+}
+
+OptionMenu "Starcraft Options"
+{
+	Title "Starcraft Option"
+	StaticText "If All turned off than default Terran"
+	Option "Terran",	"Terran",	"OnOff"
+	StaticText " "
+	Option "Zerg",	"Zerg",	"OnOff"
+	StaticText " "
+	StaticText "No protoss yet"
+	StaticText "Choose A HUD"
+	Option "HUD",	"HudStyle",	"Starcraft HUDS"
+	
+}
+ListMenu "MainMenu"
+{
+	IfGame (DOOM)
+	{
+	StaticPatch 85,0,"M_DOOM"
+	Position 93,72
+	StaticText 90,0,"Starcraft"
+	}
+	TextItem "New Game",			"n",	"PlayerclassMenu"
+	TextItem "Mod Options",			"c",	"Starcraft Options"
+	TextItem "Options",				"o",	"OptionsMenu"
+	TextItem "Load Game",			"l",	"LoadGameMenu"
+	TextItem "Save Game",			"s",	"SaveGameMenu"
+	TextItem "Quit Game",			"q",	"QuitMenu"
+}

@@ -1,0 +1,22 @@
+class Movement
+{
+ 	static double, double, double HercGraplingPull(Vector3 cActorPos,Vector3 pullTowardsPos,float speed)
+	{
+		let angle=VectorAngle(cActorPos.x-pullTowardsPos.x,cActorPos.y-pullTowardsPos.y);
+		let angleZ=pullTowardsPos.z-cActorPos.z;
+		let distance=TunMath.VectorDistance(pullTowardsPos,cActorPos);
+		//actorToPull.Vel3DFromAngle(distance*speed,angle,angleZ);
+        return distance*speed/100,angle,angleZ;
+    }
+}
+class TunMath
+{
+    static double VectorDistance(Vector3 a,Vector3 b)
+    {
+        let rx=a.x-b.x;
+        let ry=a.y-b.y;
+        let rz=a.z-b.z;
+
+        return Sqrt(rx*rx+ry*ry+rz*rz);
+    }
+}

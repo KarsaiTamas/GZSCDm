@@ -1,0 +1,96 @@
+#include "Actors/tokens"
+//#include "Actors/weapons/Projectiles"
+//#include "Actors/Unitbase"
+#include "Actors/garbage"
+
+
+#include "Actors/pickups/HealthArmor"//20031 20032 20033
+#include "Actors/pickups/NewHealthGIvers"
+
+//#include "Actors/monsters/terran/scmarauder"//20001
+//#include "Actors/monsters/terran/scmarine"//20000
+#include "Actors/monsters/terran/scsiegetank"//20007
+//#include "Actors/monsters/terran/scghost"//20002
+//#include "Actors/monsters/terran/scmedic"//20003
+//#include "Actors/monsters/terran/scthor"//20004
+//#include "Actors/monsters/terran/scfirebat"//20005
+//#include "Actors/monsters/terran/screaper"//20006
+//#include "Actors/monsters/terran/scgoliath"//20008
+//#include "Actors/monsters/terran/scvulture.zsc"//20009
+#include "Actors/weapons/marineweapon"//20010
+#include "Actors/weapons/GhostSniper"//20011
+//#include "Actors/weapons/FlameThrower"//20012
+#include "Actors/weapons/ReaperPistols"//20013
+#include "Actors/weapons/MarauderRocketL"//20014
+#include "Actors/weapons/SpiderMineWeapon"//20015
+//#include "Actors/weapons/FangWeapon"//20045
+#include "Actors/weapons/StarcraftRevolver"//20049
+#include "Actors/pickups/sctimpack"//20051
+
+
+
+//#include "Actors/Player.zsc"
+//#include "Actors/weapons/ammo"// 20016 20017 20018 20023 20044 20047
+//#include "Actors/monsters/terran/scpredator"//20019
+//#include "Actors/monsters/terran/scbanshee"//20020
+//#include "Actors/monsters/terran/sccyclone"//20021
+#include "Actors/monsters/terran/scspectre"//20022
+#include "Actors/weapons/ReaperGranade"
+#include "Actors/monsters/terran/scwarhound"//20024
+//#include "Actors/monsters/terran/scautoturret"//20025
+#include "Actors/monsters/terran/scseekmissle"//20026
+//#include "Actors/monsters/terran/scraven"//20027
+#include "Actors/monsters/terran/scwarbot"//20028
+#include "Actors/monsters/terran/scwraith"//20029
+//#include "Actors/monsters/terran/scdiamondback"//20030
+
+//#include "Actors/monsters/terran/scbattlecruiser"//20034
+//#include "Actors/monsters/terran/scviking"//20035
+//#include "Actors/monsters/terran/scspidermine"//20036
+//#include "Actors/monsters/terran/scwidowmine"//20037
+#include "Actors/monsters/terran/scsciencevessel"//20038
+//#include "Actors/monsters/terran/schellbat"//20039
+//#include "Actors/monsters/terran/scliberator"//20040
+//#include "Actors/monsters/terran/scherc"//20041
+#include "Actors/weapons/SpectreRifle"//20042
+#include "Actors/weapons/HercWeapon"//20043
+#include "Actors/monsters/zerg/sczergling"//20046
+#include "Actors/monsters/zerg/schydralisk"//20048
+#include "Actors/monsters/zerg/scmutalisk"//20050
+
+#include "Actors/weapons/YamatoCannon"//20052
+#include "Actors/monsters/zerg/scroach"//20053
+
+//20054
+
+#include "Actors/spawners/ZombiemanSpawner"
+#include "Actors/spawners/ShotgunGuySpawner"
+#include "Actors/spawners/ChaingunnerSpawner"
+#include "Actors/spawners/FatsoSpawner"
+#include "Actors/spawners/PinkySpawner"
+#include "Actors/spawners/CyberSpawner"
+#include "Actors/spawners/MastermindSpawner"
+#include "Actors/spawners/ArachnotronSpawner"
+#include "Actors/spawners/HellKnightSpawner"
+#include "Actors/spawners/ImpSpawner"
+#include "Actors/spawners/SpectreSpawner"
+#include "Actors/spawners/CacoSpawner"
+#include "Actors/spawners/RevenantSpawner"
+#include "Actors/spawners/ArchvileSpawner"
+#include "Actors/spawners/BaronSpawner"   
+#include "Actors/spawners/PainESpawner"
+#include "Actors/spawners/LostSoulSpawner"
+#include "Actors/spawners/ChaingunSpawner"
+#include "Actors/spawners/ShotgunSpawner"
+#include "Actors/spawners/ShellSpawner"
+#include "Actors/spawners/SRocketSpawner"
+#include "Actors/spawners/RocketLauncherSpawner"
+#include "Actors/spawners/RocketBoxSpawner"
+#include "Actors/spawners/SSGSpawner"
+#include "Actors/spawners/BFGSpawner"
+
+
+
+
+
+

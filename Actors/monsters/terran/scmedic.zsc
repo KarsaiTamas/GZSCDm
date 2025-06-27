@@ -19,10 +19,12 @@ class StarcraftMedic:HighTierHumanoid //20003
 	Species "scmedic";
 	DeathSound "SCMED/Death";
 	}
+	
 	override void PostBeginPlay()
 	{
 		super.PostBeginPlay();
 		healerThinker=HealableActorsThinker.GetInstance();
+		raceType=TERRAN_SC1;
 	}
 	bool GetTarget() 
 	{

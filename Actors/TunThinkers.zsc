@@ -7,16 +7,117 @@ class HealableActorsThinker:Thinker
     HealableActorsThinker Init()
     {
         ChangeStatNum(STAT_STATIC);
-
+        //monsterReplacers.Clear();
         //self.baseMonsterSpawner.Init();
-        self.monsterReplacers.push(new("BaseSpawnerData").Init("ZombieMan"));
         int i=0;
-        self.monsterReplacers[i].possibleActorsToSpawn.push(
-            new("BaseSpawnData").Init("StarcraftMarine",90,TERRAN_SC1));
-        self.monsterReplacers[i].possibleActorsToSpawn.push(
-            new("BaseSpawnData").Init("StarcraftMedic",10,TERRAN_SC1));
+        Array<BaseSpawnData> data; 
+        //UNITS//
+        AddToData(data,"StarcraftMarine",90,TERRAN_SC1);
+        AddToData(data,"StarcraftMedic",10,TERRAN_SC1); 
+        AddMonstersToSpawner("ZombieMan",i,data);
+        data.Clear();
+        i++;
+        AddToData(data,"StarcraftReaper",50,TERRAN_SC2);
+        AddToData(data,"StarcraftHerc",50,TERRAN_SC2);
+        AddMonstersToSpawner("ShotgunGuy",i,data);
+        data.Clear();
+        i++;
+        AddToData(data,"Starcraftvulture",50,TERRAN_SC1);
+        AddToData(data,"StarcraftHydralisk",50,ZERG_SC1);
+        AddMonstersToSpawner("DoomImp",i,data);
+        data.Clear();
+        i++;
+        AddToData(data,"StarcraftFirebat",25,TERRAN_SC1);
+        AddToData(data,"StarcraftHellbat",25,TERRAN_SC2);
+        AddToData(data,"StarcraftZergling",40,ZERG_SC1);
+        AddToData(data,"StarcraftRoach",25,ZERG_SC2);
+        AddMonstersToSpawner("Demon",i,data);
+        data.Clear();
+        i++;
+        AddToData(data,"StarcraftPredator",25,TERRAN_SC1);
+        AddToData(data,"StarcraftWidowMine",10,TERRAN_SC2);
+        AddToData(data,"StarcraftZergling",40,ZERG_SC1);
+        AddToData(data,"StarcraftRoach",25,ZERG_SC2);
+        AddMonstersToSpawner("Spectre",i,data);
+        data.Clear();
+        i++;
+        AddToData(data,"StarcraftGhost",100,TERRAN_SC1); 
+        AddMonstersToSpawner("ChaingunGuy",i,data);
+        data.Clear();
+        i++;
+        AddToData(data,"StarcraftBanshee",25,TERRAN_SC2); 
+        AddToData(data,"StarcraftWraith",25,TERRAN_SC1); 
+        AddToData(data,"StarcraftViking",25,TERRAN_SC2); 
+        AddToData(data,"StarcraftLiberator",25,TERRAN_SC2); 
+        AddMonstersToSpawner("Cacodemon",i,data);
+        data.Clear();
+        i++;
+        AddToData(data,"StarcraftRaven",50,TERRAN_SC2); 
+        AddToData(data,"StarcraftSciencevessel",50,TERRAN_SC1); 
+        AddMonstersToSpawner("PainElemental",i,data);
+        data.Clear();
+        i++;
+        AddToData(data,"StarcraftSeekerMissile",50,TERRAN_SC2); 
+        AddMonstersToSpawner("LostSoul",i,data);
+        data.Clear();
+        i++;
+        AddToData(data,"StarcraftCyclone",100,TERRAN_SC2); 
+        AddMonstersToSpawner("Revenant",i,data);
+        data.Clear();
+        i++;
+        AddToData(data,"StarcraftGoliath",100,TERRAN_SC1); 
+        AddMonstersToSpawner("HellKnight",i,data);
+        data.Clear();
+        i++;
+        AddToData(data,"StarcraftWarbot",50,TERRAN_SC2); 
+        AddToData(data,"StarcraftDiamondback",50,TERRAN_SC2); 
+        AddMonstersToSpawner("BaronOfHell",i,data);
+        data.Clear();
+        i++;
+        AddToData(data,"StarcraftMarauder",100,TERRAN_SC2); 
+        AddMonstersToSpawner("Fatso",i,data);
+        data.Clear();
+        i++;
+        AddToData(data,"StarcraftSpectre",100,TERRAN_SC2); 
+        AddMonstersToSpawner("Archvile",i,data);
+        data.Clear();
+        i++;
+        AddToData(data,"StarcraftSiegetank",100,TERRAN_SC1); 
+        AddMonstersToSpawner("Arachnotron",i,data);
+        data.Clear();
+        i++;
+        AddToData(data,"StarcraftThor",50,TERRAN_SC2); 
+        AddToData(data,"StarcraftBattlecruiser",50,TERRAN_SC1); 
+        AddMonstersToSpawner("SpiderMastermind",i,data);
+        data.Clear();
+        i++;
+        AddToData(data,"StarcraftWarhound",100,TERRAN_SC2); 
+        AddMonstersToSpawner("Cyberdemon",i,data);
+        //UNITS//
+
+
+
+
+
         //Console.Printf(self.monsterReplacers[i].possibleActorsToSpawn[0].baseMonsterName);
         return self;
+    }
+    void AddToData(Array<BaseSpawnData> data,name monName,int chance,RaceEnum raceType)
+    { 
+        data.push(new("BaseSpawnData").Init(monName,chance,raceType));
+    }
+    void AddMonstersToSpawner(name replacedMonster,int j,Array<BaseSpawnData> replacerMonster)
+    {
+        self.monsterReplacers.push(new("BaseSpawnerData").Init(replacedMonster));
+        for(int i=0;i<replacerMonster.Size();i++)
+        {
+            self.monsterReplacers[j].possibleActorsToSpawn.push(
+            new("BaseSpawnData").Init(
+                replacerMonster[i].baseMonsterName,
+                replacerMonster[i].chance,
+                replacerMonster[i].raceType));
+        }
+        //j++;
     }
     int GetMonsterSpawner(string mName)
     {

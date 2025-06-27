@@ -21,6 +21,7 @@ class BaseSpawnerData
 
     name GetSpawnActor()
     {
+        Console.Printf("%d",possibleActorsToSpawn.Size());
 
         for(int i=0;i<possibleActorsToSpawn.Size();i++)
         {
@@ -49,14 +50,4 @@ class BaseSpawnData
         return self;
     }
 
-}
-
-enum RaceEnum
-{
-    TERRAN_SC1,
-    TERRAN_SC2,
-    ZERG_SC1,
-    ZERG_SC2,
-    PROTOSS_SC1,
-    PROTOSS_SC2,
 }

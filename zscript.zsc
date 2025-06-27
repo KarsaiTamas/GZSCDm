@@ -1,0 +1,40 @@
+version "4.4.2"
+#include "Actors/TunEnums.zsc"
+#include "Actors/TunFunctions.zsc"
+#include "Actors/TunThinkers.zsc"
+#include "Actors/TunEvents.zsc"
+#include "Actors/weapons/Projectiles.zsc"
+
+#include "Actors/Unitbase.zsc"
+#include "Actors/Player.zsc"
+#include "Actors/monsters/terran/scmarine.zsc"//20000
+#include "Actors/monsters/terran/scmarauder.zsc"//20001
+#include "Actors/monsters/terran/scmedic.zsc"//20003
+#include "Actors/monsters/terran/scvulture.zsc"//20009
+#include "Actors/monsters/terran/scwidowmine.zsc"//20037
+#include "Actors/monsters/terran/scspidermine.zsc"//20036
+#include "Actors/monsters/terran/scautoturret.zsc"//20025
+#include "Actors/monsters/terran/scthor.zsc"//20004
+#include "Actors/monsters/terran/scviking.zsc"//20035
+#include "Actors/monsters/terran/scbanshee.zsc"//20020
+#include "Actors/monsters/terran/scbattlecruiser.zsc"//20034
+#include "Actors/monsters/terran/sccyclone.zsc"//20021
+#include "Actors/monsters/terran/scfirebat.zsc"//20005
+#include "Actors/monsters/terran/scghost.zsc"//20002
+#include "Actors/monsters/terran/scgoliath.zsc"//20008
+#include "Actors/monsters/terran/schellbat.zsc"//20039
+#include "Actors/monsters/terran/scherc.zsc"//20041
+#include "Actors/monsters/terran/scliberator.zsc"//20040
+#include "Actors/monsters/terran/scdiamondback.zsc"//20030
+#include "Actors/monsters/terran/scpredator.zsc"//20019
+#include "Actors/monsters/terran/scraven.zsc"//20027
+#include "Actors/monsters/terran/screaper.zsc"//20006
+
+
+
+#include "Actors/weapons/ammo.zsc"// 20016 20017 20018 20023 20044 20047
+#include "Actors/weapons/FlameThrower.zsc"//20012
+
+
+
+#include "Actors/BaseSpawner.zsc"

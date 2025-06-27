@@ -18,7 +18,12 @@ class StarcraftAutoturret:TerranMech //20025
 		+MISSILEMORE;
 		+MISSILEEVENMORE;
 	}
+override void PostBeginPlay()
+{
+	super.PostBeginPlay();
+	raceType=TERRAN_SC2;
 
+}
 States
 {
 	Spawn:

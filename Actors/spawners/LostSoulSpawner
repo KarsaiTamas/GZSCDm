@@ -1,4 +1,4 @@
-actor LostSoulRandomSpawner : RandomSpawner Replaces LostSoul 
+/*actor LostSoulRandomSpawner : RandomSpawner Replaces LostSoul 
 {
 
 DropItem "LostSoulTerranSpawner", 256, 100
@@ -19,4 +19,4 @@ actor LostSoulZergSpawner : RandomSpawner
 {
 
 //DropItem "PlasmaGunner", 256, 61
-}
+}*/

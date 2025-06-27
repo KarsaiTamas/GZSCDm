@@ -23,6 +23,13 @@ class Starcraftvulture:LowTierMech //20009
 	DeathSound "Vulture/Deaths";
 	AttackSound "Vulture/Shoot";
 	}
+	
+	override void PostBeginPlay()
+	{
+		super.PostBeginPlay();
+		raceType=TERRAN_SC1;
+		
+	}
 	States
 	{
 	Spawn:
@@ -84,7 +91,7 @@ Class SCVultureRocket : DoomImpBall
 	FastSpeed 25;
 	RenderStyle "Translucent";
 	+HITTARGET	;
-	DamageType "SCVultureRocket";
+	DamageType "Rocket";
 	SeeSound "";
 	DeathSound "Vulture/AttackEs";
 	scale 0.3;

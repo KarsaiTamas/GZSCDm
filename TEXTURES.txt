@@ -1,0 +1,661 @@
+sprite WEAAB0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEAAB0, 0, 0 
+}
+sprite WEAAC0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEAAC0, 0, 0 
+}
+sprite WEAAD0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEAAD0, 0, 0 
+}
+sprite WEAAE0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEAAE0, 0, 0 
+}
+sprite WEAAF0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEAAF0, 0, 0 
+}
+sprite WEAAG0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEAAG0, 0, 0 
+}
+sprite WEAAH0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEAAH0, 0, 0 
+}
+sprite WEAAI0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEAAI0, 0, 0 
+}
+sprite WEAAJ0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEAAJ0, 0, 0 
+}
+sprite WEAAK0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEAAK0, 0, 0 
+}
+sprite WEAAL0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEAAL0, 0, 0 
+}
+sprite WEAAM0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEAAM0, 0, 0 
+}
+
+
+sprite WEABA0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABB0, 0, 0 
+}
+sprite WEABB0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABB0, 0, 0 
+}
+sprite WEABC0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABC0, 0, 0 
+}
+sprite WEABD0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABD0, 0, 0 
+}
+sprite WEABE0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABE0, 0, 0 
+}
+sprite WEABF0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABF0, 0, 0 
+}
+sprite WEABG0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABG0, 0, 0 
+}
+sprite WEABH0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABH0, 0, 0 
+}
+sprite WEABI0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABI0, 0, 0 
+}
+sprite WEABJ0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABJ0, 0, 0 
+}
+sprite WEABK0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABK0, 0, 0 
+}
+
+
+
+sprite WEABL0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABL0, 0, 0 
+}
+sprite WEABM0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABM0, 0, 0 
+}
+sprite WEABN0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABN0, 0, 0 
+}
+sprite WEABO0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABO0, 0, 0 
+}
+sprite WEABP0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABP0, 0, 0 
+}
+sprite WEABP0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABP0, 0, 0 
+}
+sprite WEABQ0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABQ0, 0, 0 
+}
+sprite WEABR0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABR0, 0, 0 
+}
+sprite WEABS0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABS0, 0, 0 
+}
+sprite WEABT0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABT0, 0, 0 
+}
+sprite WEABU0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABU0, 0, 0 
+}
+sprite WEABV0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABV0, 0, 0 
+}
+sprite WEABW0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABW0, 0, 0 
+}
+sprite WEABX0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABX0, 0, 0 
+}
+sprite WEABY0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABY0, 0, 0 
+}
+sprite WEABZ0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEABZ0, 0, 0 
+}
+sprite WEACI0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEACI0, 0, 0 
+}
+
+
+sprite WEACA0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEACB0, 0, 0 
+}
+sprite WEACB0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEACB0, 0, 0 
+}
+sprite WEACC0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEACC0, 0, 0 
+}
+sprite WEACD0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEACD0, 0, 0 
+}
+sprite WEACE0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEACE0, 0, 0 
+}
+sprite WEACF0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEACF0, 0, 0 
+}
+sprite WEACG0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEACG0, 0, 0 
+}
+sprite WEACH0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 2
+   YScale 2
+   Patch WEACH0, 0, 0 
+}
+sprite SCMSB0, 300, 200
+{
+   // Switch Example
+   // Up position
+   XScale 1.2
+   YScale 1.2
+   Patch SCMSB0, 0, 0 
+}
+
+
+
+
+sprite WESFA0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESFA0, 0, 0 
+}
+sprite WESFB0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESFB0, 0, 0 
+}
+sprite WESFC0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESFC0, 0, 0 
+}
+sprite WESFD0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESFD0, 0, 0 
+}
+sprite WESFE0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESFE0, 0, 0 
+}
+sprite WESFF0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESFF0, 0, 0 
+}
+sprite WESFG0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESFG0, 0, 0 
+}
+sprite WESFH0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESFH0, 0, 0 
+}
+sprite WESFI0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESFI0, 0, 0 
+}
+sprite WESFJ0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESFJ0, 0, 0 
+}
+sprite WESFK0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESFK0, 0, 0 
+}
+sprite WESFL0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESFL0, 0, 0 
+}
+sprite WESFM0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESFM0, 0, 0 
+}
+sprite WESFN0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESFN0, 0, 0 
+}
+sprite WESFO0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESFO0, 0, 0 
+}
+
+
+
+
+sprite WESRA0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESRA0, 0, 0 
+}
+sprite WESRB0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESRB0, 0, 0 
+}
+sprite WESRC0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESRC0, 0, 0 
+}
+sprite WESRD0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESRD0, 0, 0 
+}
+sprite WESRE0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESRE0, 0, 0 
+}
+sprite WESRF0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESRF0, 0, 0 
+}
+sprite WESRG0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESRG0, 0, 0 
+}
+sprite WESRH0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESRH0, 0, 0 
+}
+sprite WESRI0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESRI0, 0, 0 
+}
+sprite WESRJ0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESRJ0, 0, 0 
+}
+sprite WESRK0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESRK0, 0, 0 
+}
+sprite WESRL0, 600, 400
+{
+   // Switch Example
+   // Up position
+   XScale 1.5
+   YScale 1.5
+   offset 60,75
+   Patch WESRL0, 0, 0 
+}
+
+
+
+
+
+
+
+
+
+
+

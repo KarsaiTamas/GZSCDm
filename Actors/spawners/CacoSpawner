@@ -1,4 +1,4 @@
-actor CacoRandomSpawner  Replaces Cacodemon 
+/*actor CacoRandomSpawner  Replaces Cacodemon 
 {
 
   states
@@ -48,4 +48,4 @@ actor CacoZergSpawner : RandomSpawner
 {
 
 DropItem "Starcraftmutalisk", 256, 61
-}
+}*/

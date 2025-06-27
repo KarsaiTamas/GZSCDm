@@ -1,4 +1,4 @@
-actor SpectreRandomSpawner Replaces Spectre 
+/*actor SpectreRandomSpawner Replaces Spectre 
 {
 
   states
@@ -46,4 +46,4 @@ actor SpectreZergSpawner : RandomSpawner
 {
 
 DropItem "StarcraftZergling", 256, 100
-}
+}*/

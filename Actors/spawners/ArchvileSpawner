@@ -1,4 +1,4 @@
-actor ArchvileRandomSpawner : RandomSpawner Replaces Archvile 
+/*actor ArchvileRandomSpawner : RandomSpawner Replaces Archvile 
 {
 
 DropItem "ArchvileTerranSpawner", 256, 100
@@ -19,4 +19,4 @@ actor ArchvileZergSpawner : RandomSpawner
 {
 
 //DropItem "PlasmaGunner", 256, 61
-}
+}*/

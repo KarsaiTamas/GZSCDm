@@ -1,4 +1,4 @@
-actor ImpSpawner Replaces DoomImp 
+/*actor ImpSpawner Replaces DoomImp 
 {
   states
   {
@@ -41,3 +41,4 @@ actor ImpZergSpawner : RandomSpawner
 {
 DropItem "StarcraftHydralisk", 256, 61
 }
+*/

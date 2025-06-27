@@ -1,0 +1,29 @@
+STARCRAFTFONT
+{
+   0 SCNUM0
+   1 SCNUM1
+   2 SCNUM2
+   3 SCNUM3
+   4 SCNUM4
+   5 SCNUM5
+   6 SCNUM6
+   7 SCNUM7
+   8 SCNUM8
+   9 SCNUM9
+   NOTRANSLATION 109	// don't touch the shadow color!
+}
+
+PROTOSSFONT
+{
+   0 PRONUM0
+   1 PRONUM1
+   2 PRONUM2
+   3 PRONUM3
+   4 PRONUM4
+   5 PRONUM5
+   6 PRONUM6
+   7 PRONUM7
+   8 PRONUM8
+   9 PRONUM9
+   NOTRANSLATION 109	// don't touch the shadow color!
+}

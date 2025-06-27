@@ -1,0 +1,153 @@
+
+Resolution 1920, 1080;
+statusbar normal, ForceScaled // Standard Doom Status bar
+{
+InInventory HudTerranToken,1
+{
+    drawimage "TERHP", -300, 765;
+    drawimage "TERARMOR", 100, 760;
+    drawimage "TERARMS", -200, 600;
+	drawimage "TERKEYS", 1600, 800;
+    drawimage "TERITEM", 1250, 750;
+	drawimage "TERAMMO", 1800, 750;
+	drawimage armoricon, 200, 900,none,100,100,forcescale;
+
+	drawnumber 4, PROTOSSFONT, TERRANGREEN, ammo1, 2100, 825,2;
+    IsSelected not MarineWeapon
+	{
+	drawnumber 4, PROTOSSFONT, TERRANGREEN, ammo2, 2100, 875,2;
+    }
+	drawnumber 3, PROTOSSFONT, TERRANGREEN, health, -50, 875,2;
+    drawnumber 3, PROTOSSFONT, TERRANGREEN, armor, 350, 875,2; 
+}
+InInventory HudZergToken,1
+{   drawimage "ZERHP", -300, 750;
+    drawimage "ZERARMOR", 100, 750;
+    drawimage "ZERARMS", -200, 600;
+	drawimage "ZERKEYS", 1600, 795;
+    drawimage "ZERITEM", 1250, 750;
+	drawimage "ZERAMMO", 1800, 750;
+	drawimage armoricon, 200, 900,none,100,100,forcescale;
+
+	drawnumber 4, PROTOSSFONT, ZERGORANGE, ammo1, 2100, 825,2;
+    IsSelected not MarineWeapon
+	{
+	drawnumber 4, PROTOSSFONT, ZERGORANGE, ammo2, 2100, 875,2;
+    }
+	drawnumber 3, PROTOSSFONT, ZERGORANGE, health, -50, 875,2;
+    drawnumber 3, PROTOSSFONT, ZERGORANGE, armor, 350, 875,2; 
+}
+InInventory HudProtossToken,1
+{   drawimage "PROHP", -300, 750;
+    drawimage "PROARMOR", 100, 750;
+    drawimage "PROARMS", -200, 600;
+	drawimage "PROKEYS", 1600, 800;
+    drawimage "PROITEM", 1250, 750;
+	drawimage "PROAMMO", 1800, 750;
+	drawimage armoricon, 200, 900,none,100,100,forcescale;
+
+	drawnumber 4, PROTOSSFONT, PROTOSSYELLOW, ammo1, 2100, 825,2;
+    IsSelected not MarineWeapon
+	{
+	drawnumber 4, PROTOSSFONT, PROTOSSYELLOW, ammo2, 2100, 875,2;
+    }
+	drawnumber 3, PROTOSSFONT, PROTOSSYELLOW, health, -50, 875,2;
+    drawnumber 3, PROTOSSFONT, PROTOSSYELLOW, armor, 350, 875,2;
+}
+	
+
+	drawswitchableimage keyslot 2, "nullimage", "STKEYS0", 1652, 915;
+	//84 105
+	drawswitchableimage keyslot 5, "nullimage", "STKEYS3", 1684, 915;
+    //52 145
+	drawswitchableimage keyslot 3, "nullimage", "STKEYS1", 1652, 950;
+	//84 140
+	drawswitchableimage keyslot 6, "nullimage", "STKEYS4", 1684, 950;
+    //52 75
+	drawswitchableimage keyslot 1, "nullimage", "STKEYS2", 1652, 880;
+	//84 70
+	drawswitchableimage keyslot 4, "nullimage", "STKEYS5", 1684, 880;
+//1100 800
+    //keys
+	//52 115
+
+//150
+	DrawSelectedInventory center, PROTOSSFONT,1425, 875;
+
+    gamemode cooperative, singleplayer
+    {
+   InInventory StarcraftRevolver, 1
+	{
+		drawimage "STYSNUM2", -125, 685,none,30,30,forcescale;
+	}else
+	{
+		drawimage "STGNUM2", -125, 685,none,30,30,forcescale;
+	//	drawnumber 1, DBIGFONT, White, 2, 690, 890,2;
+	}
+	
+	InInventory HercFlashWelder, 1 || ReaperPistols, 1
+	{
+		drawimage "STYSNUM3", -85, 685,none,30,30,forcescale;
+	}
+	else
+	{
+		drawimage "STGNUM3", -85, 685,none,30,30,forcescale;
+	}
+	InInventory MarineWeapon, 1 || GhostSniper, 1
+	{
+		drawimage "STYSNUM4", -45, 685,none,30,30,forcescale;
+	}
+	else InInventory SpectreRifle, 1
+	{
+		drawimage "STYSNUM4", -45, 685,none,30,30,forcescale;
+	}
+	else
+	{
+		drawimage "STGNUM4", -45, 685,none,30,30,forcescale;
+	}
+	//675 715 755
+	//690 730 770
+	 InInventory MarauderRocketL, 1
+	{
+		drawimage "STYSNUM5", -125, 720,none,30,30,forcescale;
+	}else
+	{
+		drawimage "STGNUM5", -125, 720,none,30,30,forcescale;
+	}
+	
+	InInventory FlameThrowerWeapon, 1 || PlasmaRifle, 1
+	{
+		drawimage "STYSNUM6", -85, 720,none,30,30,forcescale;
+	}
+	else
+	{
+		drawimage "STGNUM6", -85, 720,none,30,30,forcescale;
+	}
+	InInventory YamatoCannon, 1 
+	{
+		drawimage "STYSNUM7", -45, 720,none,30,30,forcescale;
+	}
+	else
+	{
+		drawimage "STGNUM7", -45, 720,none,30,30,forcescale;
+	}
+	
+	drawmugshot 5, 450, 875;
+    
+	Alpha 0.75 
+	{
+		InInventory SpiderMineAmmo, 1
+		{
+			drawimage "SPIIA1A5", 2000, 700,none,500,500,forcescale;
+			drawnumber 2, PROTOSSFONT, Yellow, ammo SpiderMineAmmo, 2050, 700;
+		}
+		InInventory ReaperGranadeAmmo, 1
+		{
+			drawimage "GRASA0", 2150, 700,none,200,200,forcescale;
+			drawnumber 2, PROTOSSFONT, Yellow, ammo ReaperGranadeAmmo, 2200, 700;
+		}
+	}
+	
+	}
+	
+}

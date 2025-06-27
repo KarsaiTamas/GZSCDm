@@ -1,0 +1,169 @@
+class StarcraftGhost:MidTierHumanoid //20002
+{
+	Default
+	{
+		Health 100;
+		Radius 20;
+		Height 56;
+		meleerange 100;
+		scale 0.8;
+		DropItem "MediumHealth";
+		DropItem "GhostSniper";
+		DropItem "SniperAmmo";
+		mass 40;
+		MissileHeight 32;
+		Obituary "%o was killed by a Ghost";
+		PainChance 50;
+		Speed 10;
+		Species "Scghost"	;
+		MinMissileChance 50;
+		SeeSound "SCGho/Allert";
+		DeathSound "SCGho/Deaths";
+	}
+	
+	override void PostBeginPlay()
+	{
+		super.PostBeginPlay();
+		canRegenEnergy=true; 
+		curEnergy=60;
+		maxEnergy=200;
+		raceType=TERRAN_SC1;
+		
+	}
+	
+	override void Tick()
+	{
+		super.Tick();
+		if(isInvisible)
+		{
+			curEnergy-=0.1;
+			if(curEnergy<=0)
+			{
+				ChangeStealth(false);
+			}
+		}
+		
+	}	
+States
+{
+	Spawn:
+	SCGI AB  8 A_Look	;
+	loop;
+	
+	See:
+	SCGA A 0;
+	SCGM ABCD 4 A_Chase("Shoot","Shoot");
+	SCGA A 0 
+	{
+		if(curEnergy>50)
+		{
+			Print("Enough for snipe");
+			SetState(A_jump(256,"GhostSnipe","See")); 
+		}
+
+	}
+	BSEM A 0 CheckForStealthChange();
+	Loop;
+
+	Pain:
+	SCGA A 0;
+	goto See;
+	
+	Pain.PlayerHook:
+	SCGI A 64;
+	Goto See;
+	
+	Shoot:
+	SCGA A 4 A_FaceTarget;
+	SCGA A 0 A_playsound("SCGho/SHOOT");
+	SCGA A 8 ;
+	SCGA B 8 Bright A_CustomMissile("SCGhostShoot",50,-20);
+	SCMA B 0 A_CustomMissile("SniperBulletShell",40,15,-90);
+	SCGA c 16 ;
+	SCGA A 8;
+	Goto See; 
+	
+	GhostSnipe:
+	SCGA A 4 A_FaceTarget;
+	SCGA A 8 Print("Try sniping");
+	SCGA A 0 A_CheckSight("See");
+	SCGA A 0 A_playsound("SCGho/Snipe");
+	SCGA B 4 Bright A_CustomMissile("SCGhostSnipe",50,-20);
+	SCMA B 0 A_CustomMissile("SniperBulletShell",40,15,-90);
+	SCGA B 32 ;
+	SCGM A 0 TakeEnergy(50);
+	Goto See;   
+	
+	Death:
+	SCGD A 0 TakeEnergy(200);
+	SCGD A 8 A_SCREAM ;
+	SCGD B 8 ;
+	SCGD C 8 ;
+	SCGD D 8 ;
+	SCGD E 8 A_NoBlocking;
+	SCGD F 8;
+	SCGD F -1 ;
+	stop;
+	   
+	Death.PlayerFlame:
+	Death.FirebatFlame:
+	SCGF A 0 A_PlaySound("Sound/Burn",5);
+	SCGF A 0 TakeEnergy(200);
+	SCGF A 8 A_SCREAM ;
+	SCGF B 8 ;
+	SCGF C 8 ;
+	SCGF D 8 ;
+	SCGF E 8 A_NoBlocking;
+	SCGF F 8;
+	SCGF G -1;
+	stop;
+}
+}
+
+
+class SCGhostShoot : Tracer
+{
+   	Default
+	{
+		+BLOODSPLATTER ;
+		+THRUGHOST;
+		-DONTSPLASH;
+		+MISSILE;
+		DamageFunction 20;
+		speed 60;
+		DamageType "Bullet";
+		deathsound "Reaper/ShootE";
+	   scale 0.3;
+
+	}
+	States
+	{
+	Spawn:
+	BULL A 1 Bright;
+	Loop;
+	Death:
+	PUFF CD 4;
+	Stop;
+	}
+}
+class SCGhostSnipe : Tracer
+{
+	Default
+	{
+		speed 55;
+		scale 0.4;
+		+PIERCEARMOR;
+		DamageFunction 50;
+
+	}
+	States
+	{
+	Spawn:
+	BULL A 1 Bright;
+	Loop;
+	Death:
+	PUFF CD 4;
+	Stop;
+	}
+}
+//make sniper rifle

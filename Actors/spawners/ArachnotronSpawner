@@ -1,4 +1,4 @@
-actor ArachnotronSpawner : RandomSpawner Replaces Arachnotron 
+/*actor ArachnotronSpawner : RandomSpawner Replaces Arachnotron 
 {
 
 DropItem "ArachnotronTerranSpawner", 256, 100
@@ -19,4 +19,4 @@ actor ArachnotronProtossSpawner : RandomSpawner
 actor ArachnotronZergSpawner : RandomSpawner 
 {
 //DropItem "PlasmaGunner", 256, 61
-}
+}*/

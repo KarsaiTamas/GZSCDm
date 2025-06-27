@@ -55,10 +55,9 @@ Actor PlayerSnipeTokenSlow: CustomInventory
 	Stop
   }
 }
-Actor PlayerSnipeCheckToken: Inventory{Inventory.MaxAmount 1}
-Actor VikingToken: Inventory{Inventory.MaxAmount 1}
+Actor PlayerSnipeCheckToken: Inventory{Inventory.MaxAmount 1} 
 Actor SpiderMineCount: Inventory{Inventory.MaxAmount 3}
-Actor HelionToken: Inventory{Inventory.MaxAmount 1}
+Actor TransformToken: Inventory{Inventory.MaxAmount 1}
 Actor Spawn2Token:Inventory{Inventory.MaxAmount 1}
 Actor IsBurrowed:Inventory{Inventory.MaxAmount 1}
 ACTOR RevolverToken:Inventory{Inventory.MaxAmount 6}

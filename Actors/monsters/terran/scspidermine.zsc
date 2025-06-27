@@ -176,7 +176,7 @@ class PlayerSpiderMineEx : rocket
 	seesound "";
 	deathsound "SCMad/ShootE";
 	scale 0.3;
-	DamageType "PlayerMarauderRocketShot";
+	DamageType "Rocket";
 	}
 	States
 	{

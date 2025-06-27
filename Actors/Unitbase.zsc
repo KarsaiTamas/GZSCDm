@@ -1,3 +1,4 @@
+
 class Base:Actor
 {
 	bool isMechanical;
@@ -12,6 +13,7 @@ class Base:Actor
 	float maxEnergy;
 	bool canRegenEnergy;
 	bool isInvisible;
+	RaceEnum raceType;
 	override void PostBeginPlay()
 	{
 		super.PostBeginPlay();
@@ -25,8 +27,9 @@ class Base:Actor
 		maxEnergy=0;
 		canRegenEnergy=false;
 		isInvisible=false;
+		raceType=RACE_NONE;
 	}
-	
+
 Default
 	{
 	MONSTER;
@@ -45,10 +48,6 @@ Default
 	{
 		canBeHealed=false;
 		super.Die(source, inflictor, dmgflags, MeansOfDeath);
-	}
-	void ActionTest(string test)
-	{
-		Console.Printf(test);
 	}
 	override void Tick()
 	{
@@ -79,6 +78,53 @@ Default
 		isFlying=setFly;
 		A_ChangeFlag("FLOAT",setFly);
 		A_ChangeFlag("NOGRAVITY",setFly);
+	}
+	void TakeEnergy(float amount)
+	{
+		curEnergy-=amount;
+		if(curEnergy<0)curEnergy=0;
+	}
+	
+	void ChangeStealth(bool visibility)
+	{
+		if(visibility)
+		{
+			if(curEnergy>100)
+			{
+				A_SetTranslucent(0.2,1);
+				A_playsound("SCHide/CloakOn");
+				canRegenEnergy=false;
+				isInvisible=true;
+			}
+		}
+		else
+		{
+			A_playsound("SCHide/CloakOff");
+			A_SetTranslucent(1,0);
+			canRegenEnergy=true;
+			isInvisible=false;
+		}
+	}
+	void CheckForStealthChange()
+	{
+		if(isInvisible)
+		{
+			if(!CheckSight(target))
+			{
+				ChangeStealth(false);
+			}
+		}
+		else
+		{
+			if(CheckSight(target))
+			{
+				ChangeStealth(true);
+			}
+		}
+	}
+	void Print(string writeThis)
+	{
+		Console.Printf(writeThis);
 	}
 
 } 

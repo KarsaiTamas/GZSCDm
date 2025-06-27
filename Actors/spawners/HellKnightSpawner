@@ -1,4 +1,4 @@
-actor HellKnightSpawner : RandomSpawner Replaces HellKnight 
+/*actor HellKnightSpawner : RandomSpawner Replaces HellKnight 
 {
 
 DropItem "HellKnightTerranSpawner", 256, 100
@@ -19,4 +19,4 @@ actor HellKnightProtossSpawner : RandomSpawner
 actor HellKnightZergSpawner : RandomSpawner 
 {
 //DropItem "PlasmaGunner", 256, 61
-}
+}*/

@@ -1,4 +1,4 @@
-actor FatsoRandomSpawner : RandomSpawner Replaces Fatso 
+/*actor FatsoRandomSpawner : RandomSpawner Replaces Fatso 
 {
 
 DropItem "FatsoTerranSpawner", 256, 100
@@ -19,4 +19,4 @@ actor FatsoZergSpawner : RandomSpawner
 {
 
 //DropItem "PlasmaGunner", 256, 61
-}
+}*/

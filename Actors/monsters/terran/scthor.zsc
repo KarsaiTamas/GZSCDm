@@ -23,6 +23,13 @@ class StarcraftThor:HighTierMech// 20004
 	DeathSound "SCThor/Death";
 	ActiveSound "SCThor/Allert2";
 	}
+	
+	override void PostBeginPlay()
+	{
+		super.PostBeginPlay();
+		raceType=TERRAN_SC2;
+		
+	}
 	States
 	{
 	Spawn:
@@ -95,7 +102,7 @@ class SCRocketThor : SCRocketMarauder
 	FastSpeed 40;
 	deathsound "SCMad/ShootE";
 	scale 0.9;
-	DamageType "SCRocketThor";
+	DamageType "Rocket";
 	}
 	States
 	{

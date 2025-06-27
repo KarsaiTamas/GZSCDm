@@ -21,6 +21,13 @@ class StarcraftMarine:LowTierHumanoid //20000
 	DeathSound "SCMAR/Deaths";
 	+USEKILLSCRIPTS
 	}
+	override void PostBeginPlay()
+	{
+		super.PostBeginPlay();
+		raceType=TERRAN_SC1;
+	
+	}
+	
 States
 {
 	Spawn:
@@ -95,15 +102,16 @@ class SCMarineBullet : Actor
 {
 	Default
 	{
-	scale 0.1;
-	+BLOODSPLATTER
-	+THRUGHOST
-	-DONTSPLASH
-	DamageFunction 3;
-	+MISSILE
-	speed 60;
-	deathsound "Bullet/ImpactS";
-	DamageType "Bullet";
+		scale 0.1;
+		+BLOODSPLATTER
+		+THRUGHOST
+		-DONTSPLASH
+		DamageFunction 3;
+		+MISSILE
+		speed 60;
+		deathsound "Bullet/ImpactS";
+		+NOGRAVITY;
+		DamageType "Bullet";
 	}
 
 	States

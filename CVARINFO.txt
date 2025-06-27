@@ -1,0 +1,5 @@
+server int Terran = 1;
+server int Zerg = 1;
+server int Protoss = 0;
+server int RandomPick = 0;
+user int HudStyle=1;

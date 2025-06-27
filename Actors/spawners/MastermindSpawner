@@ -1,4 +1,4 @@
-actor MastermindRandomSpawner : RandomSpawner Replaces SpiderMastermind 
+/*actor MastermindRandomSpawner : RandomSpawner Replaces SpiderMastermind 
 {
 
 DropItem "MastermindTerranSpawner", 256, 100
@@ -21,4 +21,4 @@ actor MastermindZergSpawner : RandomSpawner
 {
 
 //DropItem "PlasmaGunner", 256, 61
-}
+}*/
